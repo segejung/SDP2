@@ -1,3 +1,4 @@
 SeGe Jung
 sjung332@gatech.edu
 Spring 2020
+“Private repository, only for posting at: https://github.gatech.edu/gt-omscs-se-2020spring/6300Spring20<your GT username>.git“
