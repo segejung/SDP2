@@ -26,7 +26,7 @@ public interface MyCustomStringInterface {
      * @param string The value to be set
      */
     void setString(String string);
-
+/**
     /**
      * Returns the alphabetic character which appears most often in the string (capitalization insensitive).
      * Non-alphabetic characters are not counted.  If two alphabetic characters appear an equal number of times,
@@ -43,7 +43,7 @@ public interface MyCustomStringInterface {
      * not been set to a value.
      * @return the alphabetic character which appears most frequently in the string
      */
-    char mostCommonChar();
+    //char mostCommonChar();
 
     /**
      * Returns a string equivalent to the original string after removing all of the characters which appear in the string
@@ -62,7 +62,7 @@ public interface MyCustomStringInterface {
      * @throws NullPointerException     If the current string is null
      * @throws IllegalArgumentException If n is not an integer > 0.
      */
-    String filterLetters(int n, boolean more);
+    //String filterLetters(int n, boolean more);
 
     /**
      * Replace the individual numbers in the current string, between startPosition and endPosition
@@ -81,5 +81,6 @@ public interface MyCustomStringInterface {
      * @throws MyIndexOutOfBoundsException If "endPosition" is out of bounds (greater than the length of the string)
      * and 1 <= "startPosition" <= "endPosition"
      */
-    void numberLengthsInSubstring(int startPosition, int endPosition);
+    //void numberLengthsInSubstring(int startPosition, int endPosition);
+
 }
