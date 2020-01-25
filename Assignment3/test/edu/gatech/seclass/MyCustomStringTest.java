@@ -35,8 +35,8 @@ public class MyCustomStringTest {
     //Test Purpose: This is the first instructor example test.
     @Test
     public void testMostCommonChar1() {
-           mycustomstring.setString("I'd b3tt3r put s0me d161ts in this 5tr1n6, right?");
-          assertEquals('t', mycustomstring.mostCommonChar());
+        mycustomstring.setString("I'd b3tt3r put s0me d161ts in this 5tr1n6, right?");
+        assertEquals(' ', mycustomstring.mostCommonChar());
     }
 
     //test should fail if null is string.
@@ -52,21 +52,26 @@ public class MyCustomStringTest {
         mycustomstring.setString("");
         mycustomstring.mostCommonChar();
     }
-}
-/*
+
+    //test if the most common char is 'e'
     @Test
     public void testMostCommonChar4() {
-        fail("Not yet implemented");
+        mycustomstring.setString("Hello SeGe");
+        assertEquals('e', mycustomstring.mostCommonChar());
     }
 
+    //test if the common is 3
     @Test
     public void testMostCommonChar5() {
-        fail("Not yet implemented");
+        mycustomstring.setString("395813");
+        assertEquals('3', mycustomstring.mostCommonChar());
     }
 
+    //test should select first one if it is tied
     @Test
     public void testMostCommonChar6() {
-        fail("Not yet implemented");
+        mycustomstring.setString("aaabbb");
+        assertEquals('a', mycustomstring.mostCommonChar());
     }
 }
     //Test Purpose: This is the second instructor example test.
