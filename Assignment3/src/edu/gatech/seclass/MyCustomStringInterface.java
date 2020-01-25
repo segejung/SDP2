@@ -42,8 +42,9 @@ public interface MyCustomStringInterface {
      * @throws NullPointerException  If the current string is null, empty, contains no alphabetic characters, or has
      * not been set to a value.
      * @return the alphabetic character which appears most frequently in the string
-     */
-    //char mostCommonChar();
+ */
+    char mostCommonChar();
+
 
     /**
      * Returns a string equivalent to the original string after removing all of the characters which appear in the string
