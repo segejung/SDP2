@@ -8,11 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class SDPEncryptorActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+
+public class SDPEncryptorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     EditText inputText,keyText;
     TextView tOut;
     Button btn;
@@ -20,23 +19,22 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
     String newString,inputString;
     int key;
 
-    Switch sw1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner spinner = findViewById(R.id.targetAlphabet);
+        inputText = findViewById(R.id.messageInput);
+        keyText = findViewById(R.id.shiftNumber);
+        tOut = findViewById(R.id.cipherText);
+        btn = findViewById(R.id.encryptButton);
+
+        final Spinner spinner = findViewById(R.id.targetAlphabet);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.alphabets, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        inputText = findViewById(R.id.messageInput);
-        keyText = findViewById(R.id.shiftNumber);
-        tOut = findViewById(R.id.cipherText);
-        btn = findViewById(R.id.encryptButton);
-        sw1 = findViewById(R.id.switch1);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,19 +42,30 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
                 key = Integer.parseInt(keyText.getText().toString());
                 inputString = inputText.getText().toString();
 
-                if(sw1.isChecked()){
-                    newString = encrypter(inputString,key);
-                }else{
-                    newString = decrypter(inputString,key);
-                }
-
+                if(spinner.getSelectedItem().toString().equals("Normal")){
+                    newString = encryptor(inputString,key);
+                } else if (spinner.getSelectedItem().toString().equals("Reverse")) {
+                    newString = decryptor(inputString, key);
+                } else if (inputText.length()==0){
+                    inputText.setError("Missing Message");
+                } else if (keyText.)//else if (spinner.getSelectedItem().toString().equals("QWERTY")) {
+                  //  newString = qwerty(inputString,key);
                 tOut.setText(newString);
             }
         });
 
+
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
-    protected String encrypter(String inputString, int key){
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+    protected String encryptor(String inputString, int key){
         StringBuffer output;
         Character charac;
         int previousAscii,newAscii;
@@ -78,7 +87,7 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
         return String.valueOf(output);
     }
 
-    protected String decrypter(String inputString, int key){
+    protected String decryptor(String inputString, int key){
         StringBuffer output;
         Character charac;
         int previousAscii,newAscii;
@@ -100,21 +109,28 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
         return String.valueOf(output);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    protected String qwerty(String inputString, int key){
+        StringBuffer output;
+        Character charac;
+        String char[] newqwerty = {'a'};
+        char[] previoiusqwerty = {'b'};
+        output = new StringBuffer();
+
+        for(int i=0;i<inputString.length();i++){
+            charac = inputString.charAt(i);
+            if(charac.equals(' ')){
+                output.append(Character.toString(charac));
+                continue;
+            }
+            previoiusqwerty = (int)charac;
+            newqwerty = previoiusqwerty - key;
+            if(newqwerty < 65 && Character.isUpperCase(charac) || newqwerty < 97){
+                newqwerty += 26;
+            }
+            output.append(Character.toString((char)newqwerty));
+        }
+        return String.valueOf(output);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
 
