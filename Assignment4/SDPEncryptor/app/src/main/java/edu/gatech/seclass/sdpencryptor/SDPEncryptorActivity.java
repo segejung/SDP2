@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 
 public class SDPEncryptorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    EditText inputText,keyText;
-    TextView tOut;
-    Button btn;
+    EditText messageInput;
+    EditText shiftNumber;
+    TextView cipherText;
+    Button encryptButton;
 
     String newString,inputString;
     int key;
@@ -24,10 +25,10 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        inputText = findViewById(R.id.messageInput);
-        keyText = findViewById(R.id.shiftNumber);
-        tOut = findViewById(R.id.cipherText);
-        btn = findViewById(R.id.encryptButton);
+        messageInput = findViewById(R.id.messageInput);
+        shiftNumber = findViewById(R.id.shiftNumber);
+        cipherText = findViewById(R.id.cipherText);
+        encryptButton = findViewById(R.id.encryptButton);
 
         final Spinner spinner = findViewById(R.id.targetAlphabet);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.alphabets, android.R.layout.simple_spinner_item);
@@ -35,22 +36,27 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        encryptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                key = Integer.parseInt(keyText.getText().toString());
-                inputString = inputText.getText().toString();
+                key = Integer.parseInt(shiftNumber.getText().toString());
+                inputString = messageInput.getText().toString();
 
                 if(spinner.getSelectedItem().toString().equals("Normal")){
                     newString = encryptor(inputString,key);
                 } else if (spinner.getSelectedItem().toString().equals("Reverse")) {
                     newString = decryptor(inputString, key);
-                } else if (inputText.length()==0){
-                    inputText.setError("Missing Message");
-                } else if (keyText.)//else if (spinner.getSelectedItem().toString().equals("QWERTY")) {
+                }
+                //else if (spinner.getSelectedItem().toString().equals("QWERTY")) {
                   //  newString = qwerty(inputString,key);
-                tOut.setText(newString);
+                cipherText.setText(newString);
+
+                if (messageInput.getText().toString().equals("")){
+                    messageInput.setError("Missing Message");
+                    messageInput.requestFocus();
+                } else if (shiftNumber.getText().toString().equals(26)) {
+                    shiftNumber.setError("Invalid Shift Number");
+                }
             }
         });
 
@@ -67,19 +73,19 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
     }
     protected String encryptor(String inputString, int key){
         StringBuffer output;
-        Character charac;
+        Character cha;
         int previousAscii,newAscii;
         output = new StringBuffer();
 
         for(int i=0;i<inputString.length();i++){
-            charac = inputString.charAt(i);
-            if(charac.equals(' ')){
-                output.append(Character.toString(charac));
+            cha = inputString.charAt(i);
+            if(cha.equals(' ')){
+                output.append(Character.toString(cha));
                 continue;
             }
-            previousAscii = (int)charac;
+            previousAscii = (int)cha;
             newAscii = previousAscii + key;
-            if(newAscii > 90 && Character.isUpperCase(charac) || newAscii > 122){
+            if(newAscii > 90 && Character.isUpperCase(cha) || newAscii > 122){
                 newAscii -= 26;
             }
             output.append(Character.toString((char)newAscii));
@@ -89,48 +95,29 @@ public class SDPEncryptorActivity extends AppCompatActivity implements AdapterVi
 
     protected String decryptor(String inputString, int key){
         StringBuffer output;
-        Character charac;
+        Character cha;
         int previousAscii,newAscii;
         output = new StringBuffer();
 
         for(int i=0;i<inputString.length();i++){
-            charac = inputString.charAt(i);
-            if(charac.equals(' ')){
-                output.append(Character.toString(charac));
+            cha = inputString.charAt(i);
+            if(cha.equals(' ')){
+                output.append(Character.toString(cha));
+
                 continue;
             }
-            previousAscii = (int)charac;
+            previousAscii = (int)cha;
             newAscii = previousAscii - key;
-            if(newAscii < 65 && Character.isUpperCase(charac) || newAscii < 97){
+            if(newAscii < 65 && Character.isUpperCase(cha) || newAscii < 97){
                 newAscii += 26;
             }
             output.append(Character.toString((char)newAscii));
+
         }
         return String.valueOf(output);
     }
 
-    protected String qwerty(String inputString, int key){
-        StringBuffer output;
-        Character charac;
-        String char[] newqwerty = {'a'};
-        char[] previoiusqwerty = {'b'};
-        output = new StringBuffer();
 
-        for(int i=0;i<inputString.length();i++){
-            charac = inputString.charAt(i);
-            if(charac.equals(' ')){
-                output.append(Character.toString(charac));
-                continue;
-            }
-            previoiusqwerty = (int)charac;
-            newqwerty = previoiusqwerty - key;
-            if(newqwerty < 65 && Character.isUpperCase(charac) || newqwerty < 97){
-                newqwerty += 26;
-            }
-            output.append(Character.toString((char)newqwerty));
-        }
-        return String.valueOf(output);
-    }
 
 }
 
