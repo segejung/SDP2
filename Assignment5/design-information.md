@@ -40,4 +40,38 @@ This is denoted by having operation returnToMainMenu().
 ## a. The board will consist of a square full of letters.  The square should have the number of letters, both horizontally and vertically, indicated by the size of the square board from the game settings (4x4, 5x5, 6x6, 7x7, or 8x8).  
 The board class has several classes that makes up a board. Square is inside the board class. In the square class, the attribute is the boardSize which is an integer and can be 4 from 8. xTile and yTile indicate the size of the squares.
 
-## b. 
+## b. ⅕ (rounded up) of the letters will be vowels (a,e,i,o,u). ⅘ will be consonants.
+Letters is a class where it distinguishes vowels and consonants. The board class generatesVowels() and generatesConsonants(). 
+
+## c. The letter Q will be displayed as ‘Qu’ (so that Q never appears alone).  
+Letter class has attribute for Q. 
+
+## d. The location and particular letters should be randomly selected from a distribution of letters reflecting the weights of letters from the settings.  A letter with a weight of 5 should be 5 times as likely to be chosen as a letter with a weight of 1 (assuming both are consonants or both are vowels).  In this way, more common letters can be set to appear more often.
+Board class has an operation to generateRandom() words. While doing that, it will take into account letter class which has letterWeights information and settings. 
+
+## e. A letter may appear on the board more than once.
+
+## 5. When choosing to view statistics, the player may view (1) game score statistics, or (2) word statistics.
+See View Statistics UI
+
+## 6. For game score statistics, the player will view the list of scores, in descending order by final game score, displaying:
+## a. The final game score
+## b. The number of times the board was reset
+## c. The number of words entered in the game
+See statistics class. It has finalScore, numberOfReset, and numberOfWords. 
+
+## 7. For the word statistics, the player will view the list of words used, starting from the most frequently played, displaying:
+## a. The word
+## b. The number of times the word has been played, across all games
+Word statistics class is shown for wordUsed and numberOfTimesUsed. 
+
+## 8. The user interface must be intuitive and responsive.
+UI was not the main focus for this assignment.  
+
+## 9. The performance of the game should be such that students do not experience any considerable lag between their actions and the response of the application.
+This is outside the scope of this assignment.
+
+## 10. For simplicity, you may assume there is a single system running the application.
+
+
+
