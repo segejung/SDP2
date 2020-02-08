@@ -1,5 +1,6 @@
 # Word Game UML Class Diagram Description
 This is the description of the UML Class Diagram for word game. 
+SeGe Jung
 
 ## 1. When the application is started, the player may choose to (1) Play a word game, (2) View statistics, or (3) Adjust the game settings.  
 Main application UI is made along with three sub UI's that show (1)Play a word game, (2) View statistics, and (3) Adjust the game settings. Each sub UI's have its set of interfaces as shown in the diagram.
