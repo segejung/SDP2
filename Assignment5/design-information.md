@@ -3,7 +3,7 @@ This is the description of the UML Class Diagram for word game.
 SeGe Jung
 
 ## 1. When the application is started, the player may choose to (1) Play a word game, (2) View statistics, or (3) Adjust the game settings.  
-Main application UI is made along with three sub UI's that show (1)Play a word game, (2) View statistics, and (3) Adjust the game settings. Each sub UI's have its set of interfaces as shown in the diagram.
+Main application UI is made along with three sub UI's that show (1)Play a word game, (2) View statistics, and (3) Adjust the game settings. Each sub UI's have its set of interfaces as shown in the diagram. They are inheritance to the main UI.
 
 ## 2. When choosing to adjust the game settings, the player (1) may choose for the game to end after a certain number of minutes, from 1 to 5, defaulting to 3, (2) may adjust the size of the square board, between 4(x4) and 8(x8), defaulting to 4, and (3) may adjust the weights of the letters of the alphabet between 1 and 5, defaulting to 1.
 When Adjust the game settings is chosen, the user can make several settings as shown in the settings class. Number of minutes, size of the square board, and weights are all attributes. The ranges and default values are listed in the settings class.
@@ -39,10 +39,10 @@ This is denoted by having operation returnToMainMenu().
 
 ## 4. Whenever the board is generated, or re-generated it will meet the following criteria:
 ## a. The board will consist of a square full of letters.  The square should have the number of letters, both horizontally and vertically, indicated by the size of the square board from the game settings (4x4, 5x5, 6x6, 7x7, or 8x8).  
-The board class has several classes that makes up a board. Square is inside the board class. In the square class, the attribute is the boardSize which is an integer and can be 4 from 8. xTile and yTile indicate the size of the squares.
+The board class has several classes that makes up a board. Square is inside the board class. It is aggregation. In the square class, the attribute is the boardSize which is an integer and can be 4 from 8. xTile and yTile indicate the size of the squares.
 
 ## b. ⅕ (rounded up) of the letters will be vowels (a,e,i,o,u). ⅘ will be consonants.
-Letters is a class where it distinguishes vowels and consonants. The board class generatesVowels() and generatesConsonants(). 
+Letters is a class where it distinguishes vowels and consonants. The board class generatesVowels() and generatesConsonants(). Letter class is aggregation to Board.
 
 ## c. The letter Q will be displayed as ‘Qu’ (so that Q never appears alone).  
 Letter class has attribute for Q. 
