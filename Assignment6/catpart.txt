@@ -30,7 +30,7 @@
 # Environment
 # File length
     File length is:
-        Empty. [property empty]
+        Empty. [single][property empty]
         Not empty.
 
 # File Content
