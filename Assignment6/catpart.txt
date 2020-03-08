@@ -1,13 +1,12 @@
 # Encode OPT <filename>
 
-# Parameters
 # Filename
     Validity of filename:
         Valid.
         Invalid. [error]
 
 # OPT -w,-r,-k,-c
-    Parameters:
+    OPT:
         w.      [property w]
         r.      [property r]
         k.      [property k]
@@ -27,7 +26,7 @@
     Keep:
         empty. [error]
         specified.[if k] [property specifiedKeep]
-# Environment
+
 # File length
     File length is:
         Empty. [single][property empty]
