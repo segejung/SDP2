@@ -1,0 +1,47 @@
+# Encode OPT <filename>
+
+# Parameters
+# Filename
+    Validity of filename:
+        Valid.
+        Invalid. [error]
+
+# OPT -w,-r,-k,-c
+    Parameters:
+        w.      [property w]
+        r.      [property r]
+        k.      [property k]
+        c.      [property c]
+        empty.
+
+# [<string of delimiters>]
+    Delimiters:
+        empty. [if w]
+        specified.[if w] [property specifiedDelimiters]
+# [<string of remove>]
+    Remove:
+        empty. [error]
+        specified.[if r] [property specifiedRemove]
+
+# [<string of keep>]
+    Keep:
+        empty. [error]
+        specified.[if k] [property specifiedKeep]
+# Environment
+# File length
+    File length is:
+        Empty. [property empty]
+        Not empty.
+
+# File Content
+    File contains:
+        Words. [if !empty]
+	Remove. [if !empty][if specifiedRemove]
+        Keep. [if !empty][if specifiedKeep]
+        Delimiters. [if !empty][if specifiedDelimiters]
+        Alphabetic characters.[if !empty]
+        Non-alphabetic characters.[if !empty]
+        Uppercase.[if !empty]
+        Lowercase.[if !empty]
+        Whitespace.[if !empty]
+        No whitespace.[if !empty]
