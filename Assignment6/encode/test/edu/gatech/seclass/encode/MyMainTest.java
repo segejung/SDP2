@@ -83,10 +83,7 @@ public class MyMainTest {
         File file1 =  createTmpFile();
         FileWriter fileWriter = new FileWriter(file1);
 
-        fileWriter.write("hello Jack, I love you!!!!,\n" +
-                "do you like or love me???????.\n" +
-                "do you want to have a dinner with me? I get\n" +
-                " $10000 scholarship to fund my study. So I am so happy!");
+        fileWriter.write("hello Jack, I love you!!!!");
 
         fileWriter.close();
         return file1;
@@ -187,8 +184,7 @@ public class MyMainTest {
         String args[] = {"-k", inputFile.getPath()};
         Main.main(args);
 
-
-        assertEquals("Need to enter string after -k!", expected, actual);
+        assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
     // Purpose: <Test for validity of filename>
@@ -204,7 +200,7 @@ public class MyMainTest {
     //Purpose: test invalid opts
     //Frame #: 3
     @Test
-    public void encodeTest5() throws Exception {
+    public void encodeTest4() throws Exception {
         File inputFile1 = createInputFile6();
         String args[] = {"    ", "             ", inputFile1.getPath()};
         Main.main(args);
@@ -214,9 +210,9 @@ public class MyMainTest {
     //Purpose: test invalid opts
     //Frame #: 3
     @Test
-    public void encodeTest6() throws Exception {
+    public void encodeTest5() throws Exception {
         File inputFile1 = createInputFile6();
-        String args[] = {"-f","-m","      ","-f",inputFile1.getPath()};
+        String args[] = {"-r","-w","      ","-r",inputFile1.getPath()};
         Main.main(args);
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
 
@@ -225,17 +221,16 @@ public class MyMainTest {
     //Purpose: test invalid opts
     //Frame #: 3
     @Test
-    public void capitalizeTest33() throws Exception {
+    public void encodeTest6() throws Exception {
         File inputFile1 = createInputFile6();
-        String args[] = {"-i","-w","-o","     ", inputFile1.getPath()};
+        String args[] = {"-k","-w","-c","     ", inputFile1.getPath()};
         Main.main(args);
-        assertEquals("Usage: Capitalize  [-w [string]] [-m string] [-f] [-i|-I] [-o] <filename>", errStream.toString().trim());
-
+        assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
     // Purpose: test the input file size that is 0
     // Frame #: 4
     @Test
-    public void encodeTest4() throws Exception {
+    public void encodeTest7() throws Exception {
         File inputFile1 = createInputFile0();
         String args[] = {inputFile1.getPath()};
         Main.main(args);
@@ -244,24 +239,18 @@ public class MyMainTest {
         assertEquals("The files differ!", expected1, actual1);
     }
 
-
-
-
-
     // Purpose: test no input arguments and options. Like : capitalize file1.txt
     // Frame #: 4
     @Test
-    public void capitalizeTest2() throws Exception {
+    public void encodeTest8() throws Exception {
         File inputFile1 = createInputFile1();
         String args[] = {inputFile1.getPath()};
         Main.main(args);
-        String expected1 = "Hello Jack, I love you!!!!,\n" +
-                "Do you like or love me???????.\n" +
-                "Do you want to have a dinner with me? I get\n" +
-                " $10000 scholarship to fund my study. So I am so happy!";
+        String expected1 = "olleh kcaJ, I evol uoy!!!!";
         String actual1 = getFileContent(inputFile1.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
+
     // CapitalizeTest3
     // Purpose: test single argument and option with "-w" but without delimiters. Like : capitalize -w file1.txt
     // Frame #: 5
