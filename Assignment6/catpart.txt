@@ -14,6 +14,7 @@
         r.      [property r]
         k.      [property k]
         c.      [property c]
+	w c.    [property w c]
         empty.
 
 # [<string of delimiters>]

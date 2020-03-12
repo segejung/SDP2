@@ -437,7 +437,172 @@ Test Case 43 		(Key = 1.1.4.0.0.0.2.10.)
    File contains        :  No whitespace
 
 
-Test Case 44 		(Key = 1.1.5.0.0.0.2.1.)
+Test Case 44 		(Key = 1.1.5.1.0.0.2.1.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Words
+
+
+Test Case 45 		(Key = 1.1.5.1.0.0.2.5.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Alphabetic characters
+
+
+Test Case 46 		(Key = 1.1.5.1.0.0.2.6.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Non-alphabetic characters
+
+
+Test Case 47 		(Key = 1.1.5.1.0.0.2.7.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Uppercase
+
+
+Test Case 48 		(Key = 1.1.5.1.0.0.2.8.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Lowercase
+
+
+Test Case 49 		(Key = 1.1.5.1.0.0.2.9.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Whitespace
+
+
+Test Case 50 		(Key = 1.1.5.1.0.0.2.10.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  empty
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  No whitespace
+
+
+Test Case 51 		(Key = 1.1.5.2.0.0.2.1.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Words
+
+
+Test Case 52 		(Key = 1.1.5.2.0.0.2.4.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Delimiters
+
+
+Test Case 53 		(Key = 1.1.5.2.0.0.2.5.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Alphabetic characters
+
+
+Test Case 54 		(Key = 1.1.5.2.0.0.2.6.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Non-alphabetic characters
+
+
+Test Case 55 		(Key = 1.1.5.2.0.0.2.7.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Uppercase
+
+
+Test Case 56 		(Key = 1.1.5.2.0.0.2.8.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Lowercase
+
+
+Test Case 57 		(Key = 1.1.5.2.0.0.2.9.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  Whitespace
+
+
+Test Case 58 		(Key = 1.1.5.2.0.0.2.10.)
+   Validity of filename :  Valid
+   Validity of OPT      :  Valid
+   OPT                  :  w c
+   Delimiters           :  specified
+   RemoveString         :  <n/a>
+   KeepString           :  <n/a>
+   File length is       :  Not empty
+   File contains        :  No whitespace
+
+
+Test Case 59 		(Key = 1.1.6.0.0.0.2.1.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
@@ -448,7 +613,7 @@ Test Case 44 		(Key = 1.1.5.0.0.0.2.1.)
    File contains        :  Words
 
 
-Test Case 45 		(Key = 1.1.5.0.0.0.2.5.)
+Test Case 60 		(Key = 1.1.6.0.0.0.2.5.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
@@ -459,7 +624,7 @@ Test Case 45 		(Key = 1.1.5.0.0.0.2.5.)
    File contains        :  Alphabetic characters
 
 
-Test Case 46 		(Key = 1.1.5.0.0.0.2.6.)
+Test Case 61 		(Key = 1.1.6.0.0.0.2.6.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
@@ -470,7 +635,7 @@ Test Case 46 		(Key = 1.1.5.0.0.0.2.6.)
    File contains        :  Non-alphabetic characters
 
 
-Test Case 47 		(Key = 1.1.5.0.0.0.2.7.)
+Test Case 62 		(Key = 1.1.6.0.0.0.2.7.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
@@ -481,7 +646,7 @@ Test Case 47 		(Key = 1.1.5.0.0.0.2.7.)
    File contains        :  Uppercase
 
 
-Test Case 48 		(Key = 1.1.5.0.0.0.2.8.)
+Test Case 63 		(Key = 1.1.6.0.0.0.2.8.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
@@ -492,7 +657,7 @@ Test Case 48 		(Key = 1.1.5.0.0.0.2.8.)
    File contains        :  Lowercase
 
 
-Test Case 49 		(Key = 1.1.5.0.0.0.2.9.)
+Test Case 64 		(Key = 1.1.6.0.0.0.2.9.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
@@ -503,7 +668,7 @@ Test Case 49 		(Key = 1.1.5.0.0.0.2.9.)
    File contains        :  Whitespace
 
 
-Test Case 50 		(Key = 1.1.5.0.0.0.2.10.)
+Test Case 65 		(Key = 1.1.6.0.0.0.2.10.)
    Validity of filename :  Valid
    Validity of OPT      :  Valid
    OPT                  :  empty
