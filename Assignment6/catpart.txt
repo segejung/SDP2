@@ -4,6 +4,9 @@
     Validity of filename:
         Valid.
         Invalid. [error]
+    Validity of OPT:
+        Valid.
+        Invalid. [error]
 
 # OPT -w,-r,-k,-c
     OPT:
@@ -18,14 +21,16 @@
         empty. [if w]
         specified.[if w] [property specifiedDelimiters]
 # [<string of remove>]
-    Remove:
+    RemoveString:
         empty. [error]
-        specified.[if r] [property specifiedRemove]
+	non-alphabetic [error]
+        specified.[if r] [property specifiedRemoveString]
 
 # [<string of keep>]
-    Keep:
+    KeepString:
         empty. [error]
-        specified.[if k] [property specifiedKeep]
+	non-alphabetic [error]
+        specified.[if k] [property specifiedKeepString]
 
 # File length
     File length is:
@@ -35,8 +40,8 @@
 # File Content
     File contains:
         Words. [if !empty]
-	Remove. [if !empty][if specifiedRemove]
-        Keep. [if !empty][if specifiedKeep]
+	RemoveString. [if !empty][if specifiedRemoveString]
+        KeepString. [if !empty][if specifiedKeepString]
         Delimiters. [if !empty][if specifiedDelimiters]
         Alphabetic characters.[if !empty]
         Non-alphabetic characters.[if !empty]
