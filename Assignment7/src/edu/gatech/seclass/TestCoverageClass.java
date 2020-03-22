@@ -1,8 +1,10 @@
 package edu.gatech.seclass;
+import java.lang.ArithmeticException;
 
-public class TestCoverageClass<testCoverageMethod1> {
 
-    public testCoverageMethod1 {
+public class TestCoverageClass {
+
+    public class testCoverageMethod1 extends ArithmeticException {
 
     }
 
