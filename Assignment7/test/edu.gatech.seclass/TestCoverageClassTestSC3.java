@@ -9,7 +9,8 @@ public class TestCoverageClassTestSC3 {
     public void TestCoverageClassTestSC3() {
         TestCoverageClass test = new TestCoverageClass();
         test.testCoverageMethod2(1,1); //cover test spec 1
-        test.testCoverageMethod2(0,0); //cover test spec 2
+        test.testCoverageMethod2(0,2); //cover test spec 2
+        test.testCoverageMethod2(-1,2); //cover test spec 2
     }
 
 }

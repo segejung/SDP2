@@ -4,13 +4,14 @@ import java.lang.ArithmeticException;
 
 public class TestCoverageClassTestBC3 {
 
-    // This method achieves 100% branch coverage with fault revealed
+    // This method achieves 100% branch coverage with fault revealed at the end
+    //100% branch coverage is Necessary to reveal the fault.
     @Test
     public void TestCoverageClassTestBC3() {
         TestCoverageClass test = new TestCoverageClass();
-        test.testCoverageMethod2(10,0); //if true branch covered with fault
-        test.testCoverageMethod2(0,0); //if false branch covered and elseif true branch covered
-        test.testCoverageMethod2(-1,-1); //elseif false branch covered
+        test.testCoverageMethod3(1,0); //if true branch without fault
+        test.testCoverageMethod3(0,0); //if false branch and elseif true branch without fault
+        test.testCoverageMethod3(-1,0); //elseif false branch with fault
     }
 
 }
