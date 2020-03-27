@@ -11,13 +11,12 @@ public class TestCoverageClass {
             int e = x;
             int f = y;
             int result;
-            if (e > 0 || f > 0) {
+            if (e > 0) {
                 result = e / f;
             } else if (e == 0) {
                 result = e / (f);
             } else
                 result = e / f;
-
     }
 
     //Task2
@@ -25,7 +24,7 @@ public class TestCoverageClass {
         int a = x;
         int b = y;
         int result;
-        if (a > 0 || b > 0){
+        if (a > 0){
             result = a/b;
         }
         else if (a == 0){
@@ -40,7 +39,7 @@ public class TestCoverageClass {
         int c = x;
         int d = y;
         int result;
-        if (c > 0 || d > 0){
+        if (c > 0){
             result = c+d;
         }
         else if (c == 0){
@@ -55,7 +54,7 @@ public class TestCoverageClass {
         int g = x;
         int h = y;
         int result;
-        if (g > 0 || h > 0){
+        if (g > 0){
             result = g/h;
         }
         else if (g == 0){

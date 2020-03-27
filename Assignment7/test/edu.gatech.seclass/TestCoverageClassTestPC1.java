@@ -7,13 +7,13 @@ import static org.junit.Assert.assertEquals;
 
 public class TestCoverageClassTestPC1 {
 
-    // This method achieves 100% path coverage with no fault
+    // 100% path coverage with no fault
     @Test
     public void TestCoverageClassTestPC1() {
         TestCoverageClass run = new TestCoverageClass();
-        run.testCoverageMethod1(1,1); //if true branch without fault
-        run.testCoverageMethod1(0,1); //if false branch and elseif true branch without fault
-        run.testCoverageMethod1(-1,1); //elseif false branch with fault
+        run.testCoverageMethod1(1,1); //path 1 with no fault
+        run.testCoverageMethod1(0,1); //path 2 without fault
+        run.testCoverageMethod1(-1,1); //path 3 with fault
     }
 
 

@@ -8,8 +8,8 @@ public class TestCoverageClassTestSC4 {
     @Test
     public void TestCoverageClassTestSC4() {
         TestCoverageClass run = new TestCoverageClass();
-        run.testCoverageMethod4(1,0); //cover test spec 1
-        run.testCoverageMethod4(0,0); //cover test spec 2
+        run.testCoverageMethod4(1,0); //test specification1
+        run.testCoverageMethod4(0,0); //test specification2
 
     }
 
