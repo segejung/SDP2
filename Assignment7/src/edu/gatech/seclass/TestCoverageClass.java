@@ -4,11 +4,20 @@ package edu.gatech.seclass;
 public class TestCoverageClass {
 
     public void testCoverageMethod1 () {
-
+        //It is not possible to create such method
+        // path coverage includes statement coverage. So if path coverage is 100%, statement coverage is also 100%.
     }
 
-    public void testCoverageMethod2 () {
-
+    public void testCoverageMethod2 (int x, int y) {
+        int a = x;
+        int b = y;
+        int result;
+        if (a > 0 || b > 0){
+            result = a/b;
+        }
+        else if (a == 0){
+            result = a;
+        }
     }
 
     public void testCoverageMethod3 () {
