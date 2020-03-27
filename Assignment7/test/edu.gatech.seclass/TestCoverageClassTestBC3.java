@@ -8,10 +8,10 @@ public class TestCoverageClassTestBC3 {
     //100% branch coverage is Necessary to reveal the fault.
     @Test
     public void TestCoverageClassTestBC3() {
-        TestCoverageClass test = new TestCoverageClass();
-        test.testCoverageMethod3(1,0); //if true branch without fault
-        test.testCoverageMethod3(0,0); //if false branch and elseif true branch without fault
-        test.testCoverageMethod3(-1,0); //elseif false branch with fault
+        TestCoverageClass run = new TestCoverageClass();
+        run.testCoverageMethod3(1,0); //if true branch without fault
+        run.testCoverageMethod3(0,0); //if false branch and elseif true branch without fault
+        run.testCoverageMethod3(-1,0); //elseif false branch with fault
     }
 
 }

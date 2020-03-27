@@ -1,21 +1,23 @@
 package edu.gatech.seclass;
 
+import static org.junit.Assert.assertEquals;
+import java.awt.*;
 
 public class TestCoverageClass {
 
     //Task1
     public void testCoverageMethod1 (int x, int y) {
-        int e = x;
-        int f = y;
-        int result;
-        if (e > 0 || f > 0){
-            result = e/f;
-        }
-        else if (e == 0){
-            result = e/(f);
-        }
-        else
-            result = e/f;
+
+            int e = x;
+            int f = y;
+            int result;
+            if (e > 0 || f > 0) {
+                result = e / f;
+            } else if (e == 0) {
+                result = e / (f);
+            } else
+                result = e / f;
+
     }
 
     //Task2
@@ -33,7 +35,7 @@ public class TestCoverageClass {
             result = a/b;
         }
 
-
+    //Task3
     public void testCoverageMethod3 (int x, int y) {
         int c = x;
         int d = y;
@@ -48,10 +50,22 @@ public class TestCoverageClass {
             result = c/d;
     }
 
-    public void testCoverageMethod4 () {
-
+    //Task4
+    public void testCoverageMethod4 (int x, int y) {
+        int g = x;
+        int h = y;
+        int result;
+        if (g > 0 || h > 0){
+            result = g/h;
+        }
+        else if (g == 0){
+            result = g/h;
+        }
+        else
+            result = g/h;
     }
 
+    //Task5
     public boolean testCoverageMethod5 (boolean a, boolean b) {
         int x = 3;
         int y = 1;
@@ -73,18 +87,18 @@ public class TestCoverageClass {
     //
 // | a | b |output|
 // ================
-// | T | T |      |
-// | T | F |      |
-// | F | T |      |
-// | F | F |      |
+// | T | T |   F   |
+// | T | F |   E   |
+// | F | T |   F   |
+// | F | F |   E   |
 // ================
 //
 // Fill in the blanks in the following sentences with
 // “NEVER”, “SOMETIMES” or “ALWAYS”:
 //
-// Test suites with 100% statement coverage _____ reveal the fault in this method.
-// Test suites with 100% branch coverage ______ reveal the fault in this method.
-// Test suites with 100% path coverage ______ reveal the fault in this method.
+// Test suites with 100% statement coverage ___Sometimes__ reveal the fault in this method.
+// Test suites with 100% branch coverage __Sometimes____ reveal the fault in this method.
+// Test suites with 100% path coverage ___Always___ reveal the fault in this method.
 // ================
 
 }
