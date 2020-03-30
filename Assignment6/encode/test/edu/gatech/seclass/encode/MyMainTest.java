@@ -185,11 +185,11 @@ public class MyMainTest {
     // Frame #: 46
     @Test
     public void encodeTest11() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {inputFile1.getPath()};
+        File inputFile = createInputFile(FILE2);
+        String args[] = {inputFile.getPath()};
         Main.main(args);
         String expected1 = "olleh kcaJ, I evol uoy!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -197,11 +197,11 @@ public class MyMainTest {
     // Frame #: 6
     @Test
     public void encodeTest12() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-w", inputFile1.getPath()};
+        File inputFile = createInputFile(FILE2);
+        String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
         String expected1 = "olleh ,kcaJ I evol !!!!uoy";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -209,11 +209,11 @@ public class MyMainTest {
     // Frame #: 13
     @Test
     public void encodeTest13() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-w","a", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-w","a", inputFile.getPath()};
         Main.main(args);
         String expected1 = "J ollehkca, I love you!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -221,11 +221,11 @@ public class MyMainTest {
     // Frame #: 13
     @Test
     public void encodeTest14() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-w","ae", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-w","ae", inputFile.getPath()};
         Main.main(args);
         String expected1 = "heLlo JaCk, I love you!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -233,22 +233,22 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest15() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-r","a", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-r","a", inputFile.getPath()};
         Main.main(args);
         String expected1 = "hello Jck, I love you!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
     // Purpose: test single argument and option with "-r" with multiple string : encode -r 'Ve' file1.txt
     // Frame #: 21
     @Test
     public void encodeTest16() throws Exception {
-        File inputFile1 = createInputFile2();
-        String args[] = {"-r","Ve", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-r","Ve", inputFile.getPath()};
         Main.main(args);
         String expected1 = "OoO";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -256,11 +256,11 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest17() throws Exception {
-        File inputFile1 = createInputFile3();
-        String args[] = {"-r","9XY8", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-r","9XY8", inputFile.getPath()};
         Main.main(args);
         String expected1 = "9898!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -268,7 +268,7 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest18() throws Exception {
-        File inputFile1 = createInputFile4();
+        File inputFile1 = createInputFile();
         String args[] = {"-r","$LAN1991", inputFile1.getPath()};
         Main.main(args);
         String expected1 = "$$$$$1991$1991!!!";
@@ -280,22 +280,22 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest19() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-k","a", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-k","a", inputFile.getPath()};
         Main.main(args);
         String expected1 = "a!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
     // Purpose: test single argument and option with "-k" with multiple string : encode -k 'Ve' file1.txt
     // Frame #: 29
     @Test
     public void encodeTest20() throws Exception {
-        File inputFile1 = createInputFile2();
-        String args[] = {"-k","Ve", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-k","Ve", inputFile.getPath()};
         Main.main(args);
         String expected1 = "veevvvveev";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -303,19 +303,19 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest21() throws Exception {
-        File inputFile1 = createInputFile3();
-        String args[] = {"-k","9XY8", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-k","9XY8", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "9xy89xY8!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "9xy89xY8!!!";
+        String actual1 = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual1);
     }
 
     // Purpose: test single argument and option with "-k" but with string  contains other characters : encode -k "$LAN1991" file1.txt
     // Frame #: 29
     @Test
     public void encodeTest22() throws Exception {
-        File inputFile1 = createInputFile4();
+        File inputFile1 = createInputFile();
         String args[] = {"-k","$LAN1991", inputFile1.getPath()};
         Main.main(args);
         String expected1 = "$$$$$lAn1991$lAn1991!!!";
@@ -326,11 +326,11 @@ public class MyMainTest {
     // Frame #: 39
     @Test
     public void encodeTest23() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-c", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-c", inputFile.getPath()};
         Main.main(args);
         String expected1 = "HELLO jACK, i LOVE YOU!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
@@ -338,11 +338,11 @@ public class MyMainTest {
     // Frame #: 44
     @Test
     public void encodeTest24() throws Exception {
-        File inputFile1 = createInputFile1();
-        String args[] = {"-w","c", inputFile1.getPath()};
+        File inputFile = createInputFile();
+        String args[] = {"-w","c", inputFile.getPath()};
         Main.main(args);
         String expected1 = "OLLEH KCAj, i EVOL UOY!!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
+        String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
