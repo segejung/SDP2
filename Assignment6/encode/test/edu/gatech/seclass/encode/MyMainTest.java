@@ -80,7 +80,7 @@ public class MyMainTest {
      */
     private static final String FILE0 = "";
     private static final String FILE1 = "abc tuvw.XYZ";
-    private static final String FILE2 = "Howdy Billy, are you going to take cs6300 and cs6400 next semester?";
+    private static final String FILE2 = "Howdy Billy, are you going to take cs6300!!!";
     private static final String FILE3 = "abcXYZ123ABCxyz";
 
 
@@ -176,21 +176,21 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE0);
         String args[] = {inputFile.getPath()};
         Main.main(args);
-        String expected1 = "";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
-    // Purpose: test without OPT (it will default to -w and use all non-alphabetic characters as delimiters) : encode file1.txt
+    // Purpose: test without OPT (default to -w and use all non-alphabetic characters) : encode file1.txt
     // Frame #: 46
     @Test
     public void encodeTest11() throws Exception {
         File inputFile = createInputFile(FILE2);
         String args[] = {inputFile.getPath()};
         Main.main(args);
-        String expected1 = "olleh kcaJ, I evol uoy!!!!";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "ydwoH ylliB, era uoy gniog ot ekat sc6300!!!";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test -w without delimiter : encode -w file1.txt
@@ -200,31 +200,31 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "olleh ,kcaJ I evol !!!!uoy";
+        String expected1 = "ydwoH ylliB, era uoy gniog ot ekat !!!0036sc";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
-    // Purpose: test "-w" with a single character delimiter : encode -w 'a' file1.txt
+    // Purpose: test "-w" with a single character delimiter : encode -w 'o' file1.txt
     // Frame #: 13
     @Test
     public void encodeTest13() throws Exception {
-        File inputFile = createInputFile();
-        String args[] = {"-w","a", inputFile.getPath()};
+        File inputFile = createInputFile(FILE2);
+        String args[] = {"-w","o", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "J ollehkca, I love you!!!!";
+        String expected1 = "Hoydw Billy, are you gogni to take cs6300!!!";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
-    // Purpose: test single argument and option with "-w" but many character delimiters : encode -w 'ae' file1.txt
+    // Purpose: test single argument and option with "-w" but many character delimiters : encode -w 'il' file1.txt
     // Frame #: 13
     @Test
     public void encodeTest14() throws Exception {
-        File inputFile = createInputFile();
-        String args[] = {"-w","ae", inputFile.getPath()};
+        File inputFile = createInputFile(FILE2);
+        String args[] = {"-w","il", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "heLlo JaCk, I love you!!!!";
+        String expected1 = "Howdy Bilyl, are you going to take cs6300!!!";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
@@ -233,10 +233,10 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest15() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE2);
         String args[] = {"-r","a", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "hello Jck, I love you!!!!";
+        String expected1 = "Howdy Billy, re you going to tke cs6300!!!";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
@@ -244,10 +244,10 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest16() throws Exception {
-        File inputFile = createInputFile();
-        String args[] = {"-r","Ve", inputFile.getPath()};
+        File inputFile = createInputFile(FILE3);
+        String args[] = {"-r","aY", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "OoO";
+        String expected1 = "abcXYZ123ABCxyz";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
@@ -256,10 +256,10 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest17() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE3);
         String args[] = {"-r","9XY8", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "9898!!!";
+        String expected1 = "abcXYZ123ABCxyz";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
@@ -268,7 +268,7 @@ public class MyMainTest {
     // Frame #: 21
     @Test
     public void encodeTest18() throws Exception {
-        File inputFile1 = createInputFile();
+        File inputFile1 = createInputFile(FILE2);
         String args[] = {"-r","$LAN1991", inputFile1.getPath()};
         Main.main(args);
         String expected1 = "$$$$$1991$1991!!!";
@@ -280,7 +280,7 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest19() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE2);
         String args[] = {"-k","a", inputFile.getPath()};
         Main.main(args);
         String expected1 = "a!!!!";
@@ -291,7 +291,7 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest20() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE2);
         String args[] = {"-k","Ve", inputFile.getPath()};
         Main.main(args);
         String expected1 = "veevvvveev";
@@ -303,7 +303,7 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest21() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE2);
         String args[] = {"-k","9XY8", inputFile.getPath()};
         Main.main(args);
         String expected = "9xy89xY8!!!";
@@ -315,7 +315,7 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest22() throws Exception {
-        File inputFile1 = createInputFile();
+        File inputFile1 = createInputFile(FILE2);
         String args[] = {"-k","$LAN1991", inputFile1.getPath()};
         Main.main(args);
         String expected1 = "$$$$$lAn1991$lAn1991!!!";
@@ -326,7 +326,7 @@ public class MyMainTest {
     // Frame #: 39
     @Test
     public void encodeTest23() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE2);
         String args[] = {"-c", inputFile.getPath()};
         Main.main(args);
         String expected1 = "HELLO jACK, i LOVE YOU!!!!";
@@ -338,7 +338,7 @@ public class MyMainTest {
     // Frame #: 44
     @Test
     public void encodeTest24() throws Exception {
-        File inputFile = createInputFile();
+        File inputFile = createInputFile(FILE2);
         String args[] = {"-w","c", inputFile.getPath()};
         Main.main(args);
         String expected1 = "OLLEH KCAj, i EVOL UOY!!!!";
