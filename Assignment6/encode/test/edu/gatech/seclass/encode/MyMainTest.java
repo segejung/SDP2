@@ -86,6 +86,7 @@ public class MyMainTest {
 
 
     // test cases
+    //1
     // Purpose: input filename is invalid  : encode
     // Frame #: 1
     @Test
@@ -95,6 +96,7 @@ public class MyMainTest {
         assertEquals("Usage: Capitalize  [-w [string]] [-m string] [-f] [-i|-I] [-o] <filename>", errStream.toString().trim());
     }
 
+    //2
     // Purpose: <Throw an error if there is no string after -r>
     // Frame #: 3
     @Test
@@ -107,6 +109,7 @@ public class MyMainTest {
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
+    //3
     // Purpose: <Throw an error if there is no string after -k>
     // Frame #: 4
     @Test
@@ -119,6 +122,7 @@ public class MyMainTest {
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
+    //4
     //Purpose: test invalid opts 1
     //Frame #: 2
     @Test
@@ -129,6 +133,7 @@ public class MyMainTest {
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
+    //5
     //Purpose: test invalid opts 2
     //Frame #: 2
     @Test
@@ -140,6 +145,7 @@ public class MyMainTest {
 
     }
 
+    //6
     //Purpose: test invalid opts 3
     //Frame #: 2
     @Test
@@ -150,6 +156,7 @@ public class MyMainTest {
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
+    //7
     //Purpose: test invalid opts 4
     //Frame #: 2
     @Test
@@ -160,6 +167,7 @@ public class MyMainTest {
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
+    //8
     //Purpose: test invalid opts 5
     //Frame #: 3
     @Test
@@ -170,6 +178,7 @@ public class MyMainTest {
         assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
+    //9
     // Purpose: test the input file size that is 0
     // Frame #: 5
     @Test
@@ -182,6 +191,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //10
     // Purpose: test without OPT (default to -w and use all non-alphabetic characters) : encode file1.txt
     // Frame #: 46
     @Test
@@ -194,6 +204,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //11
     // Purpose: test -w without delimiter : encode -w file1.txt
     // Frame #: 6
     @Test
@@ -206,6 +217,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //12
     // Purpose: test "-w" with a single character delimiter : encode -w 'o' file1.txt
     // Frame #: 13
     @Test
@@ -218,6 +230,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //13
     // Purpose: test single argument and option with "-w" but many character delimiters : encode -w 'il' file1.txt
     // Frame #: 13
     @Test
@@ -230,6 +243,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //14
     // Purpose: test single argument and option with "-r" with string : encode -r 'a' file1.txt
     // Frame #: 21
     @Test
@@ -241,6 +255,8 @@ public class MyMainTest {
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
+
+    //15
     // Purpose: test single argument and option with "-r" with multiple string : encode -r 'Ve' file1.txt
     // Frame #: 21
     @Test
@@ -253,6 +269,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //16
     // Purpose: test single argument and option with "-r" but with string only contains both digits and letters : encode -m "9XY8" file1.txt
     // Frame #: 21
     @Test
@@ -265,6 +282,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //17
     // Purpose: test single argument and option with "-r" but with string  contains other characters : encode -r "$LAN1991" file1.txt
     // Frame #: 21
     @Test
@@ -277,6 +295,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+    //18
     // Purpose: test single argument and option with "-k" with string : encode -k 'a' file1.txt
     // Frame #: 29
     @Test
@@ -288,6 +307,8 @@ public class MyMainTest {
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
+
+    //19
     // Purpose: test single argument and option with "-k" with multiple string : encode -k 'Ve' file1.txt
     // Frame #: 29
     @Test
@@ -300,6 +321,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected1, actual1);
     }
 
+    //20
     // Purpose: test single argument and option with "-k" but with string only contains both digits and letters : encode -k "9XY8" file1.txt
     // Frame #: 29
     @Test
@@ -312,6 +334,7 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual1);
     }
 
+    //21
     // Purpose: test single argument and option with "-k" but with string  contains other characters : encode -k "$LAN1991" file1.txt
     // Frame #: 29
     @Test
@@ -323,6 +346,8 @@ public class MyMainTest {
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
+
+    //22
     // Purpose: test single argument and option : encode -c file1.txt
     // Frame #: 39
     @Test
@@ -330,11 +355,12 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-c", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "HELLO jACK, i LOVE YOU!!!!";
+        String expected1 = "hOWDY bILLY, ARE YOU GOING TO TAKE CS6300!!!";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
 
+    //23
     // Purpose: test two argument and option : encode -w -c file1.txt
     // Frame #: 44
     @Test
@@ -342,7 +368,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w","c", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "OLLEH KCAj, i EVOL UOY!!!!";
+        String expected1 = "YDWOh YLLIb, ERA UOY GNIOG OT EKAT SC6300!!!";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
