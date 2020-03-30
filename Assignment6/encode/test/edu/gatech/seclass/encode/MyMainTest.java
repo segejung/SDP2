@@ -82,6 +82,7 @@ public class MyMainTest {
     private static final String FILE1 = "abc tuvw.XYZ";
     private static final String FILE2 = "Howdy Billy, are you going to take cs6300!!!";
     private static final String FILE3 = "abcXYZ123ABCxyz";
+    private static final String FILE4 = "abc123ABC#@!?";
 
 
     // test cases
@@ -200,9 +201,9 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "ydwoH ylliB, era uoy gniog ot ekat !!!0036sc";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "ydwoH ylliB, era uoy gniog ot ekat !!!0036sc";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test "-w" with a single character delimiter : encode -w 'o' file1.txt
@@ -212,9 +213,9 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w","o", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "Hoydw Billy, are you gogni to take cs6300!!!";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "Hoydw Billy, are you gogni to take cs6300!!!";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test single argument and option with "-w" but many character delimiters : encode -w 'il' file1.txt
@@ -224,9 +225,9 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w","il", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "Howdy Bilyl, are you going to take cs6300!!!";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "Howdy Bilyl, are you going to take cs6300!!!";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test single argument and option with "-r" with string : encode -r 'a' file1.txt
@@ -236,9 +237,9 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-r","a", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "Howdy Billy, re you going to tke cs6300!!!";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "Howdy Billy, re you going to tke cs6300!!!";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
     // Purpose: test single argument and option with "-r" with multiple string : encode -r 'Ve' file1.txt
     // Frame #: 21
@@ -247,9 +248,9 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE3);
         String args[] = {"-r","aY", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "abcXYZ123ABCxyz";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "bcXZ123BCxz";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test single argument and option with "-r" but with string only contains both digits and letters : encode -m "9XY8" file1.txt
@@ -257,44 +258,44 @@ public class MyMainTest {
     @Test
     public void encodeTest17() throws Exception {
         File inputFile = createInputFile(FILE3);
-        String args[] = {"-r","9XY8", inputFile.getPath()};
+        String args[] = {"-r","1X2", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "abcXYZ123ABCxyz";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "abcYZ123ABCyz";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test single argument and option with "-r" but with string  contains other characters : encode -r "$LAN1991" file1.txt
     // Frame #: 21
     @Test
     public void encodeTest18() throws Exception {
-        File inputFile1 = createInputFile(FILE2);
-        String args[] = {"-r","$LAN1991", inputFile1.getPath()};
+        File inputFile1 = createInputFile(FILE4);
+        String args[] = {"-r","@Ab12", inputFile1.getPath()};
         Main.main(args);
-        String expected1 = "$$$$$1991$1991!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "c123C#@!?";
+        String actual = getFileContent(inputFile1.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: test single argument and option with "-k" with string : encode -k 'a' file1.txt
     // Frame #: 29
     @Test
     public void encodeTest19() throws Exception {
-        File inputFile = createInputFile(FILE2);
+        File inputFile = createInputFile(FILE4);
         String args[] = {"-k","a", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "a!!!!";
-        String actual1 = getFileContent(inputFile.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "a123#@!?";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
     // Purpose: test single argument and option with "-k" with multiple string : encode -k 'Ve' file1.txt
     // Frame #: 29
     @Test
     public void encodeTest20() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-k","Ve", inputFile.getPath()};
+        File inputFile = createInputFile(FILE3);
+        String args[] = {"-k","aX", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "veevvvveev";
+        String expected1 = "aX123Ax";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
@@ -303,10 +304,10 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest21() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-k","9XY8", inputFile.getPath()};
+        File inputFile = createInputFile(FILE3);
+        String args[] = {"-k","1XY3", inputFile.getPath()};
         Main.main(args);
-        String expected = "9xy89xY8!!!";
+        String expected = "XY123xy";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual1);
     }
@@ -315,12 +316,12 @@ public class MyMainTest {
     // Frame #: 29
     @Test
     public void encodeTest22() throws Exception {
-        File inputFile1 = createInputFile(FILE2);
-        String args[] = {"-k","$LAN1991", inputFile1.getPath()};
+        File inputFile = createInputFile(FILE4);
+        String args[] = {"-k", "?A", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "$$$$$lAn1991$lAn1991!!!";
-        String actual1 = getFileContent(inputFile1.getPath());
-        assertEquals("The files differ!", expected1, actual1);
+        String expected = "a123A#@!?";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
     }
     // Purpose: test single argument and option : encode -c file1.txt
     // Frame #: 39
