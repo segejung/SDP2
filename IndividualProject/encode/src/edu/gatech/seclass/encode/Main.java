@@ -18,6 +18,7 @@ public class Main {
 
         String arg = "";
         String result = "";
+        String file_content = "";
         String w_delimiter = "";
         String r_delimiter = "";
         String k_delimiter = "";
@@ -326,10 +327,10 @@ public class Main {
         }
     }
 
-    //r_opt
+    //k_opt
     private static String k_opt(String file_content, String k_delimiter)
     {
-        //r_delimiter is empty
+        //k_delimiter is empty
         if(k_delimiter.length() == 0)
         {
             char[] chars = file_content.toCharArray();
