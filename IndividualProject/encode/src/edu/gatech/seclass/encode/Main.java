@@ -67,17 +67,15 @@ public class Main {
                 }
 
                 //case 1: encode file1.txt [no opts]
-                //check opt has or not
+                //check if there is opt or not
                 if(args.length == 1 && file_exist)
                 {
                     result = empty_opt(file_content);
                 }
 
-                               //check the command
+                //check the command
                 while (i < args.length - 1 && file_exist)
                 {
-
-
                     arg = args[i].trim();
 
                     if(arg.equals("-w"))
@@ -277,34 +275,112 @@ public class Main {
         }
     }
 
-    //-m <string>: if specified, the utility will change the capitalization of all the sequences of characters that match (in a case insensitive way)
-    // the provided string so that the capitalization matches that of string (see examples).
-
-    private static String m_opt(String file_content, String w_delimiter)
+    //r_opt
+    private static String r_opt(String file_content, String r_delimiter)
     {
-        String result = "";
-        while(file_content.length() != 0)
+        //r_delimiter is empty
+        if(r_delimiter.length() == 0)
         {
-            int index = file_content.toLowerCase().indexOf(w_delimiter.toLowerCase());
+            char[] chars = file_content.toCharArray();
+            boolean found = false;
+            for (int i = 0; i < chars.length; i++)
+            {
+                //check this is a word or not
+                if(found == false && !Character.isLetter(chars[i]))
+                    found = true;
 
-            if(index != -1)
-            {
-                result = result + file_content.substring(0,index) + w_delimiter;
-                file_content = file_content.substring(index + w_delimiter.length());
+                //front is a whitespace
+                if (!found && Character.isLetter(chars[i]))
+                {
+                    chars[i] = Character.toUpperCase(chars[i]);
+                    found = true;
+                }
+                else if (Character.isWhitespace(chars[i]) )
+                { // You can add other chars here
+                    found = false;
+                }
+
             }
-            else
-            {
-                result = result + file_content;
-                break;
-            }
+            return String.valueOf(chars);
         }
-        return result;
+        else
+        {
+            //check w_delimiter,would capitalize the first character in every word (if it is a letter),
+            char[] chars = file_content.toCharArray();
+            boolean found = true;
+            for (int i = 0; i < chars.length; i++)
+            {
+                if (!found && Character.isLetter(chars[i])) {
+                    chars[i] = Character.toUpperCase(chars[i]);
+                    found = true;
+                }
+                else if (r_delimiter.indexOf(chars[i]) != -1)
+                {
+                    found = false;
+                }
+                //if the next char is not a letter then we jump
+                if(found == false && !Character.isLetter(chars[i+1]) && (i+1) <chars.length)
+                    found = true;
+            }
+            return String.valueOf(chars);
+        }
     }
 
-    //-f: if specified, the capitalize utility will flip the capitalization of all letters in the file,
+    //r_opt
+    private static String k_opt(String file_content, String k_delimiter)
+    {
+        //r_delimiter is empty
+        if(k_delimiter.length() == 0)
+        {
+            char[] chars = file_content.toCharArray();
+            boolean found = false;
+            for (int i = 0; i < chars.length; i++)
+            {
+                //check this is a word or not
+                if(found == false && !Character.isLetter(chars[i]))
+                    found = true;
+
+                //front is a whitespace
+                if (!found && Character.isLetter(chars[i]))
+                {
+                    chars[i] = Character.toUpperCase(chars[i]);
+                    found = true;
+                }
+                else if (Character.isWhitespace(chars[i]) )
+                { // You can add other chars here
+                    found = false;
+                }
+
+            }
+            return String.valueOf(chars);
+        }
+        else
+        {
+            //check w_delimiter,would capitalize the first character in every word (if it is a letter),
+            char[] chars = file_content.toCharArray();
+            boolean found = true;
+            for (int i = 0; i < chars.length; i++)
+            {
+                if (!found && Character.isLetter(chars[i])) {
+                    chars[i] = Character.toUpperCase(chars[i]);
+                    found = true;
+                }
+                else if (k_delimiter.indexOf(chars[i]) != -1)
+                {
+                    found = false;
+                }
+                //if the next char is not a letter then we jump
+                if(found == false && !Character.isLetter(chars[i+1]) && (i+1) <chars.length)
+                    found = true;
+            }
+            return String.valueOf(chars);
+        }
+    }
+
+    //-c: if specified, the capitalize utility will flip the capitalization of all letters in the file,
     // after applying any other transformation.
 
-    private static String f_opt(String file_content)
+    private static String c_opt(String file_content)
     {
         char[] chars = file_content.toCharArray();
         for (int i = 0; i < chars.length; i++)
@@ -320,37 +396,6 @@ public class Main {
             }
         }
         return String.valueOf(chars);
-    }
-
-    //-i / -I:  if specified,
-    // the capitalize utility will make all letters in the file lower case (for -i) or upper case (for -I)
-    // before applying any other transformation.
-    private static String i_opt(String file_content, String type)
-    {
-        char[] chars = file_content.toCharArray();
-
-        //lower case
-        if(type.equals("-i"))
-        {
-            for (int i = 0; i < chars.length; i++)
-            {
-                char c = chars[i];
-                chars[i] = Character.toLowerCase(c);
-            }
-
-        }
-        //upper case
-        if(type.equals("-I"))
-        {
-            for (int i = 0; i < chars.length; i++)
-            {
-                char c = chars[i];
-                chars[i] = Character.toUpperCase(c);
-            }
-        }
-
-        return String.valueOf(chars);
-
     }
 
 
