@@ -49,7 +49,6 @@ public class Main {
                 try
                 {
                     Path file_path = Paths.get(filename);
-
                     if(Files.exists(file_path))
                     {
                         content = readstring(filename);
@@ -59,7 +58,6 @@ public class Main {
                         file_not_found();
                         file_exist = false;
                     }
-
                 }
                 catch (IOException e)
                 {
