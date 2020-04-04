@@ -18,11 +18,11 @@ public class Main {
 
         String arg = "";
         String result = "";
-        String file_content = "";
+        String content = "";
         String w_delimiter = "";
         String r_delimiter = "";
         String k_delimiter = "";
-        Boolean write_back_to_file = true;
+        Boolean writefile = true;
         int i = 0;
         boolean valid_opt = true;
         boolean file_exist = true;
@@ -46,14 +46,14 @@ public class Main {
             }
             else
             {
-                //read the file to file_content. try until you get it right.
+                //read the file to content. try until you get it right.
                 try
                 {
                     Path file_path = Paths.get(filename);
 
                     if(Files.exists(file_path))
                     {
-                        file_content = read_file_to_string(filename);
+                        content = readstring(filename);
                     }
                     else
                     {
@@ -71,7 +71,7 @@ public class Main {
                 //check if there is opt or not
                 if(args.length == 1 && file_exist)
                 {
-                    result = empty_opt(file_content);
+                    result = empty_opt(content);
                 }
 
                 //check the command
@@ -86,7 +86,7 @@ public class Main {
                         {
                             //result is empty
                             if (result.length() == 0)
-                                result = w_opt(file_content,"");
+                                result = w_opt(content,"");
                             else
                                 result = w_opt(result,"");
                         }
@@ -95,7 +95,7 @@ public class Main {
                             w_delimiter = args[i+1];
                             //result is empty
                             if (result.length() == 0)
-                                result = w_opt(file_content,w_delimiter);
+                                result = w_opt(content,w_delimiter);
                             else
                                 result = w_opt(result,w_delimiter);
                             i++;
@@ -109,7 +109,7 @@ public class Main {
                         {
                             //result is empty
                             if (result.length() == 0)
-                                result = r_opt(file_content,"");
+                                result = r_opt(content,"");
                             else
                                 result = r_opt(result,"");
                         }
@@ -118,7 +118,7 @@ public class Main {
                             r_delimiter = args[i+1];
                             //result is empty
                             if (result.length() == 0)
-                                result = r_opt(file_content,r_delimiter);
+                                result = r_opt(content,r_delimiter);
                             else
                                 result = r_opt(result,r_delimiter);
                             i++;
@@ -132,7 +132,7 @@ public class Main {
                         {
                             //result is empty
                             if (result.length() == 0)
-                                result = k_opt(file_content,"");
+                                result = k_opt(content,"");
                             else
                                 result = k_opt(result,"");
                         }
@@ -141,7 +141,7 @@ public class Main {
                             k_delimiter = args[i+1];
                             //result is empty
                             if (result.length() == 0)
-                                result = k_opt(file_content,k_delimiter);
+                                result = k_opt(content,k_delimiter);
                             else
                                 result = k_opt(result,k_delimiter);
                             i++;
@@ -150,7 +150,7 @@ public class Main {
                     else if(arg.equals("-c"))
                     {
                         if (result.length() == 0)
-                            result = c_opt(file_content);
+                            result = c_opt(content);
                         else
                             result = c_opt(result);
                     }
@@ -168,8 +168,8 @@ public class Main {
                     //write String to file
                     if(file_exist)
                     {
-                        if(write_back_to_file)
-                            write_string_to_file(result,filename);
+                        if(writefile)
+                            writefile(result,filename);
                         else
                             System.out.println(result);
                     }
@@ -179,16 +179,16 @@ public class Main {
     }
 
 
-    private static String read_file_to_string(String filename) throws IOException
+    private static String readstring(String filename) throws IOException
     {
 
-        String file_content = "";
+        String content = "";
 
         try
         {
             Path file_path = Paths.get(filename);
             byte[] encoded = Files.readAllBytes(file_path);
-            file_content = new String(encoded, "UTF-8");
+            content = new String(encoded, "UTF-8");
 
 
         }
@@ -196,15 +196,15 @@ public class Main {
         {
             e.printStackTrace();
         }
-        return file_content;
+        return content;
 
     }
 
     //If no opt, use -w as default. it will reverse words.
-    private static String empty_opt(String file_content)
+    private static String empty_opt(String content)
     {
         String[] words = new String[0];
-        words = file_content.split(" ");
+        words = content.split(" ");
         String reversedString = "";
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
@@ -220,13 +220,13 @@ public class Main {
     //encode -w without delimiter and with delimiter
     // Reverses characters in each word.
 
-    private static String w_opt(String file_content, String w_delimiter) {
+    private static String w_opt(String content, String w_delimiter) {
 
         //if there is no w delimiter, then reverse characters in words separated by whitespace.
         //.split is the whitespace
         String[] words = new String[0];
         if (w_delimiter.length() == 0) {
-            words = file_content.split(" ");
+            words = content.split(" ");
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
@@ -241,7 +241,7 @@ public class Main {
         else
         {
             //if there is a delimiter, need to add the character here.
-            words = file_content.split(" ");
+            words = content.split(" ");
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
@@ -256,31 +256,31 @@ public class Main {
     }
 
     //r_opt. if specified, it will remove the selected characters.
-    private static String r_opt(String file_content, String r_content)
+    private static String r_opt(String content, String r_content)
     {
        String result = "";
-        while(file_content.length() != 0)
+        while(content.length() != 0)
         {
-            String result = file_content.replaceAll("r_content","");
+            String result = content.replaceAll("r_content","");
         }
         return result;
     }
 
     //k_opt. if specified, it will keep the selected characters.
-    private static String k_opt(String file_content, String k_content)
+    private static String k_opt(String content, String k_content)
     {
         String result = "";
-        while(file_content.length() != 0)
+        while(content.length() != 0)
         {
-            String result = file_content.replaceAll("k_content","");
+            String result = content.replaceAll("k_content","");
         }
         return result;
     }
 
     //If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
-    private static String c_opt(String file_content)
+    private static String c_opt(String content)
     {
-        char[] chars = file_content.toCharArray();
+        char[] chars = content.toCharArray();
         for (int i = 0; i < chars.length; i++)
         {
             char c = chars[i];
@@ -296,7 +296,7 @@ public class Main {
         return String.valueOf(chars);
     }
 
-    private static void write_string_to_file(String result, String filename)
+    private static void writefile(String result, String filename)
     {
         try (PrintWriter out = new PrintWriter(filename))
         {
