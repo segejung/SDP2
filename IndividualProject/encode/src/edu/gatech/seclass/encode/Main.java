@@ -199,80 +199,62 @@ public class Main {
         return file_content;
 
     }
-    //no opts
-    //If none of the OPT flags is specified,
-// capitalize capitalizes the first character in each line in the file.
+
+    //If no opt, use -w as default.
     private static String empty_opt(String file_content)
     {
-        char[] chars = file_content.toCharArray();
-        boolean found = false;
-        for (int i = 0; i < chars.length; i++)
-        {
-            if (!found && Character.isLetter(chars[i])) {
-                chars[i] = Character.toUpperCase(chars[i]);
-                found = true;
+        String[] words = new String[0];
+        words = file_content.split(" ");
+        String reversedString = "";
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            String reverseWord = "";
+            for (int j = word.length() - 1; j >= 0; j--) {
+                reverseWord = reverseWord + word.charAt(j);
             }
-            else if ( chars[i] == '\n' || chars[i] == '\r')
-            {
-                //\n next word first letter should be a letter
-                if(i+1 < chars.length && Character.isLetter(chars[i+1]))
-                    found = false;
-            }
+            reversedString = reversedString + reverseWord + " ";
         }
-        return String.valueOf(chars);
+        return String.valueOf(words);
     }
-    //capitalize -w file1.txt
-    //capitalizes the first letter in every whitespace delimited word.
+
+    //encode -w file1.txt
+    //Reverses characters in each word.
     //capitalize -w “abc” file1.txt
     //would capitalize the first character in every word (if it is a letter),
     // where a word is any string of characters terminated by ‘a’, ‘b’, ‘c’, or the end of the file.
-    private static String w_opt(String file_content, String w_delimiter)
-    {
-        //w_delimiter is empty
-        if(w_delimiter.length() == 0)
-        {
-            char[] chars = file_content.toCharArray();
-            boolean found = false;
-            for (int i = 0; i < chars.length; i++)
-            {
-                //check this is a word or not
-                if(found == false && !Character.isLetter(chars[i]))
-                    found = true;
+    private static String w_opt(String file_content, String w_delimiter) {
 
-                //front is a whitespace
-                if (!found && Character.isLetter(chars[i]))
-                {
-                    chars[i] = Character.toUpperCase(chars[i]);
-                    found = true;
-                }
-                else if (Character.isWhitespace(chars[i]) )
-                { // You can add other chars here
-                    found = false;
-                }
 
+        //if there is no w delimiter, then reverse characters in words separacted by whitespace.
+        //.split is the whitespace
+        String[] words = new String[0];
+        if (w_delimiter.length() == 0) {
+            words = file_content.split(" ");
+            String reversedString = "";
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
+                String reverseWord = "";
+                for (int j = word.length() - 1; j >= 0; j--) {
+                    reverseWord = reverseWord + word.charAt(j);
+                }
+                reversedString = reversedString + reverseWord + " ";
             }
-            return String.valueOf(chars);
+            return String.valueOf(words);
         }
         else
         {
-            //check w_delimiter,would capitalize the first character in every word (if it is a letter),
-            char[] chars = file_content.toCharArray();
-            boolean found = true;
-            for (int i = 0; i < chars.length; i++)
-            {
-                if (!found && Character.isLetter(chars[i])) {
-                    chars[i] = Character.toUpperCase(chars[i]);
-                    found = true;
+            //if there is a delimiter, need to add the character here.
+            words = file_content.split(" ");
+            String reversedString = "";
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
+                String reverseWord = "";
+                for (int j = word.length() - 1; j >= 0; j--) {
+                    reverseWord = reverseWord + word.charAt(j);
                 }
-                else if (w_delimiter.indexOf(chars[i]) != -1)
-                {
-                    found = false;
-                }
-                //if the next char is not a letter then we jump
-                if(found == false && !Character.isLetter(chars[i+1]) && (i+1) <chars.length)
-                    found = true;
+                reversedString = reversedString + reverseWord + " ";
             }
-            return String.valueOf(chars);
+            return String.valueOf(words);
         }
     }
 
@@ -378,9 +360,8 @@ public class Main {
         }
     }
 
-    //-c: if specified, the capitalize utility will flip the capitalization of all letters in the file,
-    // after applying any other transformation.
-
+    //-c_opt is the utility that reverses the capitalization of lowercase to uppercase and uppercase to lowercase.
+    //Method for c operation.
     private static String c_opt(String file_content)
     {
         char[] chars = file_content.toCharArray();
