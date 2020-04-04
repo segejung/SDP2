@@ -200,7 +200,7 @@ public class Main {
 
     }
 
-    //If no opt, use -w as default.
+    //If no opt, use -w as default. it will reverse words.
     private static String empty_opt(String file_content)
     {
         String[] words = new String[0];
@@ -217,15 +217,12 @@ public class Main {
         return String.valueOf(words);
     }
 
-    //encode -w file1.txt
-    //Reverses characters in each word.
-    //capitalize -w “abc” file1.txt
-    //would capitalize the first character in every word (if it is a letter),
-    // where a word is any string of characters terminated by ‘a’, ‘b’, ‘c’, or the end of the file.
+    //encode -w without delimiter and with delimiter
+    // Reverses characters in each word.
+
     private static String w_opt(String file_content, String w_delimiter) {
 
-
-        //if there is no w delimiter, then reverse characters in words separacted by whitespace.
+        //if there is no w delimiter, then reverse characters in words separated by whitespace.
         //.split is the whitespace
         String[] words = new String[0];
         if (w_delimiter.length() == 0) {
@@ -258,55 +255,26 @@ public class Main {
         }
     }
 
-    //r_opt
-    private static String r_opt(String file_content, String r_delimiter)
+    //r_opt. if specified, it will remove the selected characters.
+    private static String m_opt(String file_content, String w_content)
     {
-        //r_delimiter is empty
-        if(r_delimiter.length() == 0)
+        String result = "";
+        while(file_content.length() != 0)
         {
-            char[] chars = file_content.toCharArray();
-            boolean found = false;
-            for (int i = 0; i < chars.length; i++)
-            {
-                //check this is a word or not
-                if(found == false && !Character.isLetter(chars[i]))
-                    found = true;
+            int index = file_content.toLowerCase().indexOf(w_content.toLowerCase());
 
-                //front is a whitespace
-                if (!found && Character.isLetter(chars[i]))
-                {
-                    chars[i] = Character.toUpperCase(chars[i]);
-                    found = true;
-                }
-                else if (Character.isWhitespace(chars[i]) )
-                { // You can add other chars here
-                    found = false;
-                }
-
-            }
-            return String.valueOf(chars);
-        }
-        else
-        {
-            //check w_delimiter,would capitalize the first character in every word (if it is a letter),
-            char[] chars = file_content.toCharArray();
-            boolean found = true;
-            for (int i = 0; i < chars.length; i++)
+            if(index != -1)
             {
-                if (!found && Character.isLetter(chars[i])) {
-                    chars[i] = Character.toUpperCase(chars[i]);
-                    found = true;
-                }
-                else if (r_delimiter.indexOf(chars[i]) != -1)
-                {
-                    found = false;
-                }
-                //if the next char is not a letter then we jump
-                if(found == false && !Character.isLetter(chars[i+1]) && (i+1) <chars.length)
-                    found = true;
+                result = result + file_content.substring(0,index) + w_content;
+                file_content = file_content.substring(index + w_content.length());
             }
-            return String.valueOf(chars);
+            else
+            {
+                result = result + file_content;
+                break;
+            }
         }
+        return result;
     }
 
     //k_opt
