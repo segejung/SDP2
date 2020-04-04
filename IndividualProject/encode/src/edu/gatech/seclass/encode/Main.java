@@ -101,7 +101,7 @@ public class Main {
                             i++;
                         }
                     }
-                    //same for checking for r OPT
+                    //option 3. same for checking for r OPT
                     else if(arg.equals("-r"))
                     {
                         //r needs to have string after -r
@@ -120,13 +120,13 @@ public class Main {
                                 result = content;
                         }
                     }
-                    //same for checking for k OPT
+                    //option 4. same for checking for k OPT
                     else if(arg.equals("-k"))
                     {
                         //r needs to have string after -k
                         if( (i+1) != (args.length-1) && !args[i+1].startsWith("-"))
                         {
-                            r_delimiter = args[i+1];
+                            k_delimiter = args[i+1];
                             if (result.length() == 0)
                                 result = k_opt(content,k_delimiter);
                             else
@@ -140,6 +140,7 @@ public class Main {
                         }
                     }
 
+                    //option 5. c opt.
                     else if(arg.equals("-c"))
                     {
                         if (result.length() == 0)
@@ -151,7 +152,7 @@ public class Main {
 
                 }
 
-                //there has some invalid opts
+                //option 6. invalid opts
                 if(valid_opt == false)
                 {
                     usage();
@@ -174,23 +175,18 @@ public class Main {
 
     private static String readstring(String filename) throws IOException
     {
-
         String content = "";
-
         try
         {
             Path file_path = Paths.get(filename);
             byte[] encoded = Files.readAllBytes(file_path);
             content = new String(encoded, "UTF-8");
-
-
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
         return content;
-
     }
 
     //If no opt, use -w as default. it will reverse words.
@@ -234,7 +230,7 @@ public class Main {
         else
         {
             //if there is a delimiter, need to add the character here.
-            words = content.split(" ");
+            words = content.split(w_delimiter);
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
@@ -249,25 +245,22 @@ public class Main {
     }
 
     //r_opt. if specified, it will remove the selected characters.
-    private static String r_opt(String content, String r_content)
-    {
-       String result = "";
-        while(content.length() != 0)
-        {
-            String result = content.replaceAll("r_content","");
+    private static String r_opt(String content, String r_content) {
+
+        String result = null;
+        while (content.length() != 0) {
+            result = content.replaceAll(content, r_content);
         }
-        return result;
+        return String.valueOf(result);
     }
 
     //k_opt. if specified, it will keep the selected characters.
-    private static String k_opt(String content, String k_content)
-    {
-        String result = "";
-        while(content.length() != 0)
-        {
-            String result = content.replaceAll("k_content","");
+    private static String k_opt(String content, String k_content) {
+        String result = null;
+        while (content.length() != 0) {
+            result = content.replaceAll(content, k_content);
         }
-        return result;
+        return String.valueOf(result);
     }
 
     //If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
