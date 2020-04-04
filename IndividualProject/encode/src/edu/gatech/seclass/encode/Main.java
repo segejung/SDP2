@@ -16,6 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws IllegalArgumentException {
 
+        //initialization
         String arg = "";
         String result = "";
         String content = "";
@@ -27,22 +28,20 @@ public class Main {
         boolean valid_opt = true;
         boolean file_exist = true;
 
-        //check if there are no arguments.
+        //see if the file has any argument inside.
         if(args == null || args.length == 0) {
             usage();
         }
         else
         {
+            //see if the filename is not 0.
             String filename = args[args.length -1];
-            //check the filename if right format
-
             if(filename == null || filename.length() == 0)
                 file_not_found();
 
             if(filename.startsWith("-"))
             {
                 usage();
-                //System.out.println("2");
             }
             else
             {
@@ -67,18 +66,19 @@ public class Main {
                     e.printStackTrace();
                 }
 
-                //case 1: encode file1.txt [no opts]
+                //option 1. encode file with no opts
                 //check if there is opt or not
                 if(args.length == 1 && file_exist)
                 {
                     result = empty_opt(content);
                 }
 
-                //check the command
+                //While file exists, perform other cases.
                 while (i < args.length - 1 && file_exist)
                 {
                     arg = args[i].trim();
 
+                    //option 2. -w
                     if(arg.equals("-w"))
                     {
                         //i+1 is the filename or next opt then w_delimiter is ""
@@ -92,8 +92,8 @@ public class Main {
                         }
                         else
                         {
+                            //if there is a delimiter, then push w_delimiter to method.
                             w_delimiter = args[i+1];
-                            //result is empty
                             if (result.length() == 0)
                                 result = w_opt(content,w_delimiter);
                             else
@@ -104,49 +104,42 @@ public class Main {
                     //same for checking for r OPT
                     else if(arg.equals("-r"))
                     {
-                        //i+1 is the filename or next opt then r_delimiter is ""
-                        if( (i+1) == (args.length-1) || args[i+1].startsWith("-") )
-                        {
-                            //result is empty
-                            if (result.length() == 0)
-                                result = r_opt(content,"");
-                            else
-                                result = r_opt(result,"");
-                        }
-                        else
+                        //r needs to have string after -r
+                        if( (i+1) != (args.length-1) && !args[i+1].startsWith("-"))
                         {
                             r_delimiter = args[i+1];
-                            //result is empty
                             if (result.length() == 0)
                                 result = r_opt(content,r_delimiter);
                             else
                                 result = r_opt(result,r_delimiter);
                             i++;
                         }
+                        else
+                        {
+                            if (result.length() == 0)
+                                result = content;
+                        }
                     }
                     //same for checking for k OPT
                     else if(arg.equals("-k"))
                     {
-                        //i+1 is the filename or next opt then k_delimiter is ""
-                        if( (i+1) == (args.length-1) || args[i+1].startsWith("-") )
+                        //r needs to have string after -k
+                        if( (i+1) != (args.length-1) && !args[i+1].startsWith("-"))
                         {
-                            //result is empty
-                            if (result.length() == 0)
-                                result = k_opt(content,"");
-                            else
-                                result = k_opt(result,"");
-                        }
-                        else
-                        {
-                            k_delimiter = args[i+1];
-                            //result is empty
+                            r_delimiter = args[i+1];
                             if (result.length() == 0)
                                 result = k_opt(content,k_delimiter);
                             else
                                 result = k_opt(result,k_delimiter);
                             i++;
                         }
+                        else
+                        {
+                            if (result.length() == 0)
+                                result = content;
+                        }
                     }
+
                     else if(arg.equals("-c"))
                     {
                         if (result.length() == 0)
