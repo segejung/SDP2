@@ -256,80 +256,28 @@ public class Main {
     }
 
     //r_opt. if specified, it will remove the selected characters.
-    private static String m_opt(String file_content, String w_content)
+    private static String r_opt(String file_content, String r_content)
     {
-        String result = "";
+       String result = "";
         while(file_content.length() != 0)
         {
-            int index = file_content.toLowerCase().indexOf(w_content.toLowerCase());
-
-            if(index != -1)
-            {
-                result = result + file_content.substring(0,index) + w_content;
-                file_content = file_content.substring(index + w_content.length());
-            }
-            else
-            {
-                result = result + file_content;
-                break;
-            }
+            String result = file_content.replaceAll("r_content","");
         }
         return result;
     }
 
-    //k_opt
-    private static String k_opt(String file_content, String k_delimiter)
+    //k_opt. if specified, it will keep the selected characters.
+    private static String k_opt(String file_content, String k_content)
     {
-        //k_delimiter is empty
-        if(k_delimiter.length() == 0)
+        String result = "";
+        while(file_content.length() != 0)
         {
-            char[] chars = file_content.toCharArray();
-            boolean found = false;
-            for (int i = 0; i < chars.length; i++)
-            {
-                //check this is a word or not
-                if(found == false && !Character.isLetter(chars[i]))
-                    found = true;
-
-                //front is a whitespace
-                if (!found && Character.isLetter(chars[i]))
-                {
-                    chars[i] = Character.toUpperCase(chars[i]);
-                    found = true;
-                }
-                else if (Character.isWhitespace(chars[i]) )
-                { // You can add other chars here
-                    found = false;
-                }
-
-            }
-            return String.valueOf(chars);
+            String result = file_content.replaceAll("k_content","");
         }
-        else
-        {
-            //check w_delimiter,would capitalize the first character in every word (if it is a letter),
-            char[] chars = file_content.toCharArray();
-            boolean found = true;
-            for (int i = 0; i < chars.length; i++)
-            {
-                if (!found && Character.isLetter(chars[i])) {
-                    chars[i] = Character.toUpperCase(chars[i]);
-                    found = true;
-                }
-                else if (k_delimiter.indexOf(chars[i]) != -1)
-                {
-                    found = false;
-                }
-                //if the next char is not a letter then we jump
-                if(found == false && !Character.isLetter(chars[i+1]) && (i+1) <chars.length)
-                    found = true;
-            }
-            return String.valueOf(chars);
-        }
+        return result;
     }
 
-    //-c_opt is the utility that reverses the capitalization of lowercase to uppercase and uppercase to lowercase.
-    //Method for c operation.
+    //If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
     private static String c_opt(String file_content)
     {
         char[] chars = file_content.toCharArray();
@@ -348,7 +296,6 @@ public class Main {
         return String.valueOf(chars);
     }
 
-
     private static void write_string_to_file(String result, String filename)
     {
         try (PrintWriter out = new PrintWriter(filename))
@@ -360,7 +307,6 @@ public class Main {
             e.printStackTrace();
         }
     }
-
 
     private static void usage()
     {
