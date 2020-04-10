@@ -212,7 +212,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
-        String expected = "ydwoH ylliB, era uoy gniog ot ekat !!!0036sc";
+        String expected = "ydwoH ,ylliB era uoy gniog ot ekat !!!0036sc ";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
@@ -225,7 +225,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w","o", inputFile.getPath()};
         Main.main(args);
-        String expected = "Hoydw Billy, are you gogni to take cs6300!!!";
+        String expected = "H y era ,ylliB ydw g u t gni !!!0036sc ekat  ";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
@@ -238,7 +238,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w","il", inputFile.getPath()};
         Main.main(args);
-        String expected = "Howdy Bilyl, are you going to take cs6300!!!";
+        String expected = "B ydwoH !!!0036sc ekat ot gniog uoy era ,yl ";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }

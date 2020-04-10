@@ -205,8 +205,7 @@ public class Main {
     //If no opt, use -w as default. it will reverse words.
     private static String empty_opt(String fcontent)
     {
-        String[] words = new String[0];
-        words = fcontent.split(" ");
+        String[] words = fcontent.split(" ");
         String reversedString = "";
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
@@ -216,7 +215,7 @@ public class Main {
             }
             reversedString = reversedString + reverseWord + " ";
         }
-        return String.valueOf(words);
+        return reversedString;
     }
 
     //encode -w without delimiter and with delimiter
@@ -228,32 +227,34 @@ public class Main {
         //.split is the whitespace
         String[] chars = new String[0];
         if (w_delimiter.length() == 0) {
-            chars = fcontent.split(" ");
+
+            String[] words = fcontent.split(" ");
             String reversedString = "";
-            for (int i = 0; i < chars.length; i++) {
-                String word = chars[i];
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
                 String reverseWord = "";
                 for (int j = word.length() - 1; j >= 0; j--) {
                     reverseWord = reverseWord + word.charAt(j);
                 }
                 reversedString = reversedString + reverseWord + " ";
             }
-            return String.valueOf(chars);
+            return reversedString;
+
         }
         else
         {
             //if there is a delimiter, need to add the character here.
-            chars = fcontent.split(w_delimiter);
+            String[] words = fcontent.split(w_delimiter);
             String reversedString = "";
-            for (int i = 0; i < chars.length; i++) {
-                String word = chars[i];
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
                 String reverseWord = "";
                 for (int j = word.length() - 1; j >= 0; j--) {
                     reverseWord = reverseWord + word.charAt(j);
                 }
                 reversedString = reversedString + reverseWord + " ";
             }
-            return String.valueOf(chars);
+            return reversedString;
         }
     }
 
