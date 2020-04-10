@@ -252,35 +252,32 @@ public class Main {
     }
 
     //r_opt. if specified, it will remove the selected characters.
-    private static String r_opt(String fcontent, String r_content) {
+    private static String r_opt(String fcontent, String r_delimiter) {
 
         String result = "";
         while(fcontent.length() != 0)
         {
 
-            int index = fcontent.toLowerCase().indexOf(r_content.toLowerCase());
+                result = fcontent.replace(r_delimiter, "");
+                fcontent = fcontent.substring(r_delimiter.length());
+            }
 
-            if(index != -1)
-            {
-                result = result + fcontent.replaceAll("X", "");
-                fcontent = fcontent.substring(index + r_content.length());
-            }
-            else
-            {
-                result = result + fcontent;
-                break;
-            }
-        }
+
+
+
         return result;
     }
 
     //k_opt. if specified, it will keep the selected characters.
-    private static String k_opt(String fcontent, String k_content) {
-        String result = null;
-        while (fcontent.length() != 0) {
-            result = fcontent.replaceAll(fcontent, k_content);
+    private static String k_opt(String fcontent, String k_delimiter) {
+        String result = "";
+        while(fcontent.length() != 0)
+        {
+
+            result = fcontent.replaceAll(k_delimiter, "");
+            fcontent = fcontent.substring(k_delimiter.length());
         }
-        return String.valueOf(result);
+        return result;
     }
 
     //PERFECT: If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
