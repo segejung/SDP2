@@ -226,34 +226,34 @@ public class Main {
 
         //if there is no w delimiter, then reverse characters in words separated by whitespace.
         //.split is the whitespace
-        String[] words = new String[0];
+        String[] chars = new String[0];
         if (w_delimiter.length() == 0) {
-            words = fcontent.split(" ");
+            chars = fcontent.split(" ");
             String reversedString = "";
-            for (int i = 0; i < words.length; i++) {
-                String word = words[i];
+            for (int i = 0; i < chars.length; i++) {
+                String word = chars[i];
                 String reverseWord = "";
                 for (int j = word.length() - 1; j >= 0; j--) {
                     reverseWord = reverseWord + word.charAt(j);
                 }
                 reversedString = reversedString + reverseWord + " ";
             }
-            return String.valueOf(words);
+            return String.valueOf(chars);
         }
         else
         {
             //if there is a delimiter, need to add the character here.
-            words = fcontent.split(w_delimiter);
+            chars = fcontent.split(w_delimiter);
             String reversedString = "";
-            for (int i = 0; i < words.length; i++) {
-                String word = words[i];
+            for (int i = 0; i < chars.length; i++) {
+                String word = chars[i];
                 String reverseWord = "";
                 for (int j = word.length() - 1; j >= 0; j--) {
                     reverseWord = reverseWord + word.charAt(j);
                 }
                 reversedString = reversedString + reverseWord + " ";
             }
-            return String.valueOf(words);
+            return String.valueOf(chars);
         }
     }
 
