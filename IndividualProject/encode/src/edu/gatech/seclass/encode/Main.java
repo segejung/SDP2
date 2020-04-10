@@ -122,6 +122,7 @@ public class Main {
                         {
                             if (result.length() == 0)
                                 result = fcontent;
+                                usage();
                         }
                     }
                     //option 4. same for checking for k OPT
@@ -141,6 +142,7 @@ public class Main {
                         {
                             if (result.length() == 0)
                                 result = fcontent;
+                                usage();
                         }
                     }
 
@@ -205,7 +207,8 @@ public class Main {
     //If no opt, use -w as default. it will reverse words.
     private static String empty_opt(String fcontent)
     {
-        String[] words = fcontent.split(" ");
+        String delimiters = " ";
+        String[] words = fcontent.split(delimiters);
         String reversedString = "";
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
@@ -225,7 +228,6 @@ public class Main {
 
         //if there is no w delimiter, then reverse characters in words separated by whitespace.
         //.split is the whitespace
-        String[] chars = new String[0];
         if (w_delimiter.length() == 0) {
 
             String[] words = fcontent.split(" ");
