@@ -83,7 +83,7 @@ public class MyMainTest {
     private static final String FILE2 = "Howdy Billy, are you going to take cs6300!!!";
     private static final String FILE3 = "abcXYZ123ABCxyz";
     private static final String FILE4 = "abc123ABC#@!?";
-
+    private static final String FILE5 = "abcABC";
 
     // test cases
     //1
@@ -308,6 +308,8 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
     }
 
+
+
     //19
     // Purpose: test single argument and option with "-k" with multiple string : encode -k 'Ve' file1.txt
     // Frame #: 29
@@ -373,4 +375,16 @@ public class MyMainTest {
         assertEquals("The files differ!", expected1, actual1);
     }
 
+    //25
+    // Purpose: test single argument and option with "-k" with string : encode -k 'a' file1.txt
+    // Frame #: 29
+    @Test
+    public void encodeTest25() throws Exception {
+        File inputFile = createInputFile(FILE5);
+        String args[] = {"-k","a", inputFile.getPath()};
+        Main.main(args);
+        String expected = "aA";
+        String actual = getFileContent(inputFile.getPath());
+        assertEquals("The files differ!", expected, actual);
+    }
 }

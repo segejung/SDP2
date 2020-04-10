@@ -2,6 +2,12 @@ package edu.gatech.seclass.encode;
 
 import java.io.*;
 import java.nio.file.*;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -251,31 +257,22 @@ public class Main {
         }
     }
 
-    //r_opt. if specified, it will remove the selected characters.
+    //If r_opt, remove the character from the string. Non alphabetic characters are unaffected.
     private static String r_opt(String fcontent, String r_delimiter) {
-
         String result = "";
-        while(fcontent.length() != 0)
-        {
-
-                result = fcontent.replace(r_delimiter, "");
-                fcontent = fcontent.substring(r_delimiter.length());
-            }
-
-
-
-
+        for (int i = 0; i < fcontent.length(); i++) {
+            String character = String.valueOf(fcontent.charAt(i));
+            if (!r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
+                result = result.concat(character);
+        }
         return result;
     }
-
-    //k_opt. if specified, it will keep the selected characters.
     private static String k_opt(String fcontent, String k_delimiter) {
         String result = "";
-        while(fcontent.length() != 0)
-        {
-
-            result = fcontent.replaceAll(k_delimiter, "");
-            fcontent = fcontent.substring(k_delimiter.length());
+        for (int i = 0; i < fcontent.length(); i++) {
+            String character = String.valueOf(fcontent.charAt(i));
+            if (k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+                result = result.concat(character);
         }
         return result;
     }
