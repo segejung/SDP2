@@ -19,7 +19,7 @@ public class Main {
         //initialization
         String arg = "";
         String result = "";
-        String content = "";
+        String fcontent = "";
         String w_delimiter = "";
         String r_delimiter = "";
         String k_delimiter = "";
@@ -45,13 +45,13 @@ public class Main {
             }
             else
             {
-                //read the file to content. try until you get it right.
+                //read the file to fcontent. try until you get it right.
                 try
                 {
                     Path file_path = Paths.get(filename);
                     if(Files.exists(file_path))
                     {
-                        content = readstring(filename);
+                        fcontent = readstring(filename);
                     }
                     else
                     {
@@ -68,7 +68,7 @@ public class Main {
                 //check if there is opt or not
                 if(args.length == 1 && file_exist)
                 {
-                    result = empty_opt(content);
+                    result = empty_opt(fcontent);
                 }
 
                 //While file exists, perform other cases.
@@ -84,7 +84,7 @@ public class Main {
                         {
                             //result is empty
                             if (result.length() == 0)
-                                result = w_opt(content,"");
+                                result = w_opt(fcontent,"");
                             else
                                 result = w_opt(result,"");
                         }
@@ -93,7 +93,7 @@ public class Main {
                             //if there is a delimiter, then push w_delimiter to method.
                             w_delimiter = args[i+1];
                             if (result.length() == 0)
-                                result = w_opt(content,w_delimiter);
+                                result = w_opt(fcontent,w_delimiter);
                             else
                                 result = w_opt(result,w_delimiter);
                             i++;
@@ -107,7 +107,7 @@ public class Main {
                         {
                             r_delimiter = args[i+1];
                             if (result.length() == 0)
-                                result = r_opt(content,r_delimiter);
+                                result = r_opt(fcontent,r_delimiter);
                             else
                                 result = r_opt(result,r_delimiter);
                             i++;
@@ -115,7 +115,7 @@ public class Main {
                         else
                         {
                             if (result.length() == 0)
-                                result = content;
+                                result = fcontent;
                         }
                     }
                     //option 4. same for checking for k OPT
@@ -126,7 +126,7 @@ public class Main {
                         {
                             k_delimiter = args[i+1];
                             if (result.length() == 0)
-                                result = k_opt(content,k_delimiter);
+                                result = k_opt(fcontent,k_delimiter);
                             else
                                 result = k_opt(result,k_delimiter);
                             i++;
@@ -134,7 +134,7 @@ public class Main {
                         else
                         {
                             if (result.length() == 0)
-                                result = content;
+                                result = fcontent;
                         }
                     }
 
@@ -142,11 +142,20 @@ public class Main {
                     else if(arg.equals("-c"))
                     {
                         if (result.length() == 0)
-                            result = c_opt(content);
+                            result = c_opt(fcontent);
                         else
                             result = c_opt(result);
                     }
-                    i++;
+                    else if(arg.equals("-r") || arg.equals("-k"))
+                    {
+                        //do nothing
+                    }
+                    else
+                    {
+                        valid_opt = false;
+                        break;
+                    }
+                    ++i;
 
                 }
 
@@ -173,25 +182,25 @@ public class Main {
 
     private static String readstring(String filename) throws IOException
     {
-        String content = "";
+        String fcontent = "";
         try
         {
             Path file_path = Paths.get(filename);
             byte[] encoded = Files.readAllBytes(file_path);
-            content = new String(encoded, "UTF-8");
+            fcontent = new String(encoded, "UTF-8");
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        return content;
+        return fcontent;
     }
 
     //If no opt, use -w as default. it will reverse words.
-    private static String empty_opt(String content)
+    private static String empty_opt(String fcontent)
     {
         String[] words = new String[0];
-        words = content.split(" ");
+        words = fcontent.split(" ");
         String reversedString = "";
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
@@ -207,13 +216,13 @@ public class Main {
     //encode -w without delimiter and with delimiter
     // Reverses characters in each word.
 
-    private static String w_opt(String content, String w_delimiter) {
+    private static String w_opt(String fcontent, String w_delimiter) {
 
         //if there is no w delimiter, then reverse characters in words separated by whitespace.
         //.split is the whitespace
         String[] words = new String[0];
         if (w_delimiter.length() == 0) {
-            words = content.split(" ");
+            words = fcontent.split(" ");
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
@@ -228,7 +237,7 @@ public class Main {
         else
         {
             //if there is a delimiter, need to add the character here.
-            words = content.split(w_delimiter);
+            words = fcontent.split(w_delimiter);
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
@@ -243,28 +252,41 @@ public class Main {
     }
 
     //r_opt. if specified, it will remove the selected characters.
-    private static String r_opt(String content, String r_content) {
+    private static String r_opt(String fcontent, String r_content) {
 
-        String result = null;
-        while (content.length() != 0) {
-            result = content.replaceAll(content, r_content);
+        String result = "";
+        while(fcontent.length() != 0)
+        {
+
+            int index = fcontent.toLowerCase().indexOf(r_content.toLowerCase());
+
+            if(index != -1)
+            {
+                result = result + fcontent.replaceAll("X", "");
+                fcontent = fcontent.substring(index + r_content.length());
+            }
+            else
+            {
+                result = result + fcontent;
+                break;
+            }
         }
-        return String.valueOf(result);
+        return result;
     }
 
     //k_opt. if specified, it will keep the selected characters.
-    private static String k_opt(String content, String k_content) {
+    private static String k_opt(String fcontent, String k_content) {
         String result = null;
-        while (content.length() != 0) {
-            result = content.replaceAll(content, k_content);
+        while (fcontent.length() != 0) {
+            result = fcontent.replaceAll(fcontent, k_content);
         }
         return String.valueOf(result);
     }
 
-    //If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
-    private static String c_opt(String content)
+    //PERFECT: If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
+    private static String c_opt(String fcontent)
     {
-        char[] chars = content.toCharArray();
+        char[] chars = fcontent.toCharArray();
         for (int i = 0; i < chars.length; i++)
         {
             char c = chars[i];

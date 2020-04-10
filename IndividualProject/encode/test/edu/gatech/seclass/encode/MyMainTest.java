@@ -93,7 +93,7 @@ public class MyMainTest {
     public void encodeTest1(){
         String args[] = null; //invalid argument
         Main.main(args);
-        assertEquals("Usage: Capitalize  [-w [string]] [-m string] [-f] [-i|-I] [-o] <filename>", errStream.toString().trim());
+        assertEquals("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
     //2
