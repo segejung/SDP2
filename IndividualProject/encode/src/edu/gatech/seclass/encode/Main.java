@@ -102,7 +102,7 @@ public class Main {
 
 
                     //d needs to have string after -d
-                    if (arg.equals("-w")) {
+                    else if (arg.equals("-w")) {
                         {
                             if (result.length() == 0)
                                 result = w_opt(fcontent, d_delimiter);
