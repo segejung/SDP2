@@ -221,20 +221,6 @@ public class Main {
         } while(m.find());
         return sb.toString();
     }
-        /*
-        String[] words = fcontent.split("\\pL+");
-        String reversedString = "";
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            String reverseWord = "";
-            for (int j = word.length() - 1; j >= 0; j--) {
-                reverseWord = reverseWord + word.charAt(j);
-            }
-            reversedString = reversedString + reverseWord + " ";
-        }
-        return reversedString;
-    }
-    */
 
     //If d_opt,
     private static String d_opt(String fcontent, String d_delimiter) {
