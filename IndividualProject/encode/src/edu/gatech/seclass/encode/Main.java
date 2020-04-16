@@ -121,6 +121,7 @@ public class Main {
                         } else {
                             if (result.length() == 0)
                                 result = fcontent;
+                                usage();
                         }
                     }
                     //option 4. same for checking for k OPT
@@ -136,6 +137,7 @@ public class Main {
                         } else {
                             if (result.length() == 0)
                                 result = fcontent;
+                                usage();
                         }
                     }
                     else if(arg.equals("-r") || arg.equals("-k") || arg.equals("-c"))
