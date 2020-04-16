@@ -2,12 +2,14 @@ package edu.gatech.seclass.encode;
 
 import java.io.*;
 import java.nio.file.*;
-import java.io.FileWriter;
+import java.util.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.lang.StringBuffer;
+import java.lang.StringBuilder;
+import java.util.regex.Pattern;
+
 
 public class Main {
 
@@ -19,7 +21,7 @@ public class Main {
      * Empty Main class for compiling Assignment 6.
      * DO NOT ALTER THIS CLASS or implement it.
      */
-
+    static final Pattern WORD = Pattern.compile("\\pL+");
     public static void main(String[] args) throws IllegalArgumentException {
         //initialization
         String arg = "";
@@ -207,10 +209,20 @@ public class Main {
         return fcontent;
     }
     //If no opt, use -w as default. it will reverse words.
-    private static String empty_opt(String fcontent)
-    {
-
-        String[] words = fcontent.split("[^\\w']");
+    static String empty_opt(String fcontent) {
+        Matcher m = WORD.matcher(fcontent);
+        if(!m.find()) return fcontent;
+        StringBuilder sb = new StringBuilder(fcontent);
+        do {
+            for(int ix1 = m.start(), ix2 = m.end() - 1; ix1 < ix2; ix1++, ix2--) {
+                sb.setCharAt(ix1, fcontent.charAt(ix2));
+                sb.setCharAt(ix2, fcontent.charAt(ix1));
+            }
+        } while(m.find());
+        return sb.toString();
+    }
+        /*
+        String[] words = fcontent.split("\\pL+");
         String reversedString = "";
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
@@ -222,6 +234,7 @@ public class Main {
         }
         return reversedString;
     }
+    */
 
     //If d_opt,
     private static String d_opt(String fcontent, String d_delimiter) {
