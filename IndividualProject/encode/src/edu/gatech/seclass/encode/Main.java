@@ -142,7 +142,7 @@ public class Main {
                     }
                     else if(arg.equals("-r") || arg.equals("-k") || arg.equals("-c"))
                     {
-                        //do nothing here
+                        usage();
                     }
                     else
                     {
@@ -256,17 +256,17 @@ public class Main {
         else
         {
             //if there is a delimiter, need to add the character here.
-            String[] words = fcontent.split(w_delimiter);
-            String reversedString = "";
-            for (int i = 0; i < words.length; i++) {
-                String word = words[i];
-                String reverseWord = "";
-                for (int j = word.length() - 1; j >= 0; j--) {
-                    reverseWord = reverseWord + word.charAt(j);
+            String[] wordy = fcontent.split(w_delimiter);
+            String reversedString2 = "";
+            for (int i = 0; i < wordy.length; i++) {
+                String word2 = wordy[i];
+                String reverseWord2 = "";
+                for (int j = word2.length() - 1; j >= 0; j--) {
+                    reverseWord2 = reverseWord2 + word2.charAt(j);
                 }
-                reversedString = reversedString + reverseWord + " ";
+                reversedString2 = reversedString2 + reverseWord2 + " ";
             }
-            return reversedString;
+            return reversedString2;
         }
     }
 

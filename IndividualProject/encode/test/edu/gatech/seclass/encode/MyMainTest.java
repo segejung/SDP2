@@ -84,6 +84,7 @@ public class MyMainTest {
     private static final String FILE3 = "abcXYZ123ABCxyz";
     private static final String FILE4 = "abc123ABC#@!?";
     private static final String FILE5 = "abcABC hello? I am,";
+    private static final String FILE6 = "adcyu*srtud *bjkk7?^";
 
     // test cases
     // Purpose: input filename is invalid  : encode
@@ -255,7 +256,7 @@ public class MyMainTest {
     @Test
     public void encodeTest17() throws Exception {
         File inputFile = createInputFile(FILE2);
-        String args[] = {"-w", inputFile.getPath()};
+        String args[] = {"-w", "a", inputFile.getPath()};
         Main.main(args);
         String expected = "ydwoH ,ylliB era uoy gniog ot ekat retupmoc ";
         String actual = getFileContent(inputFile.getPath());
