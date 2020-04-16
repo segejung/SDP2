@@ -108,26 +108,12 @@ public class Main {
                     //option 2. -w
                     else if(arg.equals("-w"))
                     {
-                        //i+1 is the filename or next opt then w_delimiter is ""
-                        if( (i+1) == (args.length-1) || args[i+1].startsWith("-") )
-                        {
-                            //result is empty
-                            if (result.length() == 0)
-                                result = w_opt(fcontent,"");
-                            else
-                                result = w_opt(result,"");
-                        }
+                        if (result.length() == 0)
+                            result = w_opt(fcontent);
                         else
-                        {
-                            //if there is a delimiter, then push w_delimiter to method.
-                            w_delimiter = args[i+1];
-                            if (result.length() == 0)
-                                result = w_opt(fcontent,w_delimiter);
-                            else
-                                result = w_opt(result,w_delimiter);
-                            i++;
-                        }
+                            result = w_opt(result);
                     }
+
                     //option 3. same for checking for r OPT
                     else if(arg.equals("-r"))
                     {
@@ -256,10 +242,9 @@ public class Main {
     }
     //encode -w without delimiter and with delimiter
     // Reverses characters in each word.
-    private static String w_opt(String fcontent, String w_delimiter) {
+    private static String w_opt(String fcontent) {
 
-        //if there is no w delimiter, then reverse characters in words separated by whitespace.
-        if (w_delimiter.length() == 0) {
+        //if there is -w, then reverse characters in words separated by whitespace.
             String[] words = fcontent.split(" ");
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
@@ -272,24 +257,6 @@ public class Main {
             }
             return reversedString;
         }
-        else
-        {
-            //if there is a delimiter, need to add the character here.
-            String[] words = fcontent.split(w_delimiter);
-            String reversedString = "";
-            for (int i = 0; i < words.length; i++) {
-                String word = words[i];
-                String reverseWord = "";
-                for (int j = word.length() - 1; j >= 0; j--) {
-                    reverseWord = reverseWord + word.charAt(j);
-                }
-                reversedString = reversedString + reverseWord + " ";
-            }
-            return reversedString;
-        }
-    }
-
-
 
     //If r_opt, remove the character from the string. Non alphabetic characters are unaffected.
     private static String r_opt(String fcontent, String r_delimiter) {
