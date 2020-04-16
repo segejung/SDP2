@@ -255,10 +255,10 @@ public class MyMainTest {
     // Frame #: 6
     @Test
     public void encodeTest17() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-w", "a", inputFile.getPath()};
+        File inputFile = createInputFile(FILE6);
+        String args[] = {"-w", "k", "-c", inputFile.getPath()};
         Main.main(args);
-        String expected = "ydwoH ,ylliB era uoy gniog ot ekat retupmoc ";
+        String expected = "JB* DUTRS*UYCDA  ^?7 ";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
@@ -280,9 +280,9 @@ public class MyMainTest {
     @Test
     public void encodeTest19() throws Exception {
         File inputFile = createInputFile(FILE2);
-        String args[] = {"-w","o", inputFile.getPath()};
+        String args[] = {"-k","go", inputFile.getPath()};
         Main.main(args);
-        String expected = "H y era ,ylliB ydw g u t gni c ekat  retupm ";
+        String expected = "ooggoo";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
@@ -486,7 +486,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE5);
         String args[] = {"-k","a", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "OhIbUOIOOUO";
+        String expected1 = "aAa";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
