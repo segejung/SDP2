@@ -86,9 +86,27 @@ public class Main {
                 while (i < args.length - 1 && file_exist)
                 {
                     arg = args[i].trim();
-
+                    if(arg.equals("-d"))
+                    {
+                        //d needs to have string after -d
+                        if( (i+1) != (args.length-1) && !args[i+1].startsWith("-"))
+                        {
+                            d_delimiter = args[i+1];
+                            if (result.length() == 0)
+                                result = d_opt(fcontent,d_delimiter);
+                            else
+                                result = d_opt(result,d_delimiter);
+                            i++;
+                        }
+                        else
+                        {
+                            if (result.length() == 0)
+                                result = fcontent;
+                            usage();
+                        }
+                    }
                     //option 2. -w
-                    if(arg.equals("-w"))
+                    else if(arg.equals("-w"))
                     {
                         //i+1 is the filename or next opt then w_delimiter is ""
                         if( (i+1) == (args.length-1) || args[i+1].startsWith("-") )
@@ -359,7 +377,7 @@ public class Main {
 
     private static void usage()
     {
-        System.err.println("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>");
+        System.err.println("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>");
     }
     private static void file_not_found()
     {
