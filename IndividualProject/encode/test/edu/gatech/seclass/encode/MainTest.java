@@ -97,10 +97,6 @@ public class MainTest {
 
     // test cases
 
-    /*
-     *   TEST CASES
-     */
-
     // Purpose: To provide an example of a test case format
     // Frame #: Instructor example 1 from assignment directions
     @Test
