@@ -80,86 +80,67 @@ public class Main {
                     result = empty_opt(fcontent);
                 }
 
-                //While file exists, perform other cases.
-                while (i < args.length - 1 && file_exist)
-                {
+                //Perform -w first.
+                while (i < args.length - 1 && file_exist) {
                     arg = args[i].trim();
 
                     //option 2. -w
-                    if(arg.equals("-w"))
-                    {
+                    if (arg.equals("-w")) {
                         //i+1 is the filename or next opt then w_delimiter is ""
-                        if( (i+1) == (args.length-1) || args[i+1].startsWith("-") )
-                        {
+                        if ((i + 1) == (args.length - 1) || args[i + 1].startsWith("-")) {
                             //result is empty
                             if (result.length() == 0)
-                                result = w_opt(fcontent,"");
+                                result = w_opt(fcontent, "");
                             else
-                                result = w_opt(result,"");
-                        }
-                        else
-                        {
+                                result = w_opt(result, "");
+                        } else {
                             //if there is a delimiter, then push w_delimiter to method.
-                            w_delimiter = args[i+1];
+                            w_delimiter = args[i + 1];
                             if (result.length() == 0)
-                                result = w_opt(fcontent,w_delimiter);
+                                result = w_opt(fcontent, w_delimiter);
                             else
-                                result = w_opt(result,w_delimiter);
+                                result = w_opt(result, w_delimiter);
                             i++;
                         }
                     }
-                    //option 3. same for checking for r OPT
-                    else if(arg.equals("-r"))
-                    {
+                    i++;
+                }
+                i=0;
+                //perform -r or -k second
+                while (i < args.length - 1 && file_exist) {
+                    arg = args[i].trim();
+                    if (arg.equals("-r")) {
                         //r needs to have string after -r
-                        if( (i+1) != (args.length-1) && !args[i+1].startsWith("-"))
-                        {
-                            r_delimiter = args[i+1];
+                        if ((i + 1) != (args.length - 1) && !args[i + 1].startsWith("-")) {
+                            r_delimiter = args[i + 1];
                             if (result.length() == 0)
-                                result = r_opt(fcontent,r_delimiter);
+                                result = r_opt(fcontent, r_delimiter);
                             else
-                                result = r_opt(result,r_delimiter);
+                                result = r_opt(result, r_delimiter);
                             i++;
-                        }
-                        else
-                        {
+                        } else {
                             if (result.length() == 0)
                                 result = fcontent;
-                            usage();
                         }
                     }
                     //option 4. same for checking for k OPT
-                    else if(arg.equals("-k"))
-                    {
+                    else if (arg.equals("-k")) {
                         //r needs to have string after -k
-                        if( (i+1) != (args.length-1) && !args[i+1].startsWith("-"))
-                        {
-                            k_delimiter = args[i+1];
+                        if ((i + 1) != (args.length - 1) && !args[i + 1].startsWith("-")) {
+                            k_delimiter = args[i + 1];
                             if (result.length() == 0)
-                                result = k_opt(fcontent,k_delimiter);
+                                result = k_opt(fcontent, k_delimiter);
                             else
-                                result = k_opt(result,k_delimiter);
+                                result = k_opt(result, k_delimiter);
                             i++;
-                        }
-                        else
-                        {
+                        } else {
                             if (result.length() == 0)
                                 result = fcontent;
-                            usage();
                         }
                     }
-
-                    //option 5. c opt.
-                    else if(arg.equals("-c"))
+                    else if(arg.equals("-r") || arg.equals("-k") || arg.equals("-c"))
                     {
-                        if (result.length() == 0)
-                            result = c_opt(fcontent);
-                        else
-                            result = c_opt(result);
-                    }
-                    else if(arg.equals("-r") || arg.equals("-k"))
-                    {
-                        //do nothing
+                        //do nothing here
                     }
                     else
                     {
@@ -167,6 +148,21 @@ public class Main {
                         break;
                     }
                     ++i;
+                }
+
+                //-c is the last operator
+                i=0;
+                while (i < args.length - 1 && file_exist) {
+                    arg = args[i].trim();
+                    //option 5. c opt.
+                    if(arg.equals("-c"))
+                    {
+                        if (result.length() == 0)
+                            result = c_opt(fcontent);
+                        else
+                            result = c_opt(result);
+                    }
+                    i++;
 
                 }
 
@@ -208,8 +204,8 @@ public class Main {
         }
         return fcontent;
     }
-    //If no opt, use -w as default. it will reverse words.
-    static String empty_opt(String fcontent) {
+    //If no opt, use -w as default. reverse using all non-alphabetic character as delimiter.
+    private static String empty_opt(String fcontent) {
         Matcher m = WORD.matcher(fcontent);
         if(!m.find()) return fcontent;
         StringBuilder sb = new StringBuilder(fcontent);
@@ -239,10 +235,10 @@ public class Main {
     }
     //encode -w without delimiter and with delimiter
     // Reverses characters in each word.
-    private static String w_opt(String fcontent, String d_delimiter) {
+    private static String w_opt(String fcontent, String w_delimiter) {
 
         //if there is no w delimiter, then reverse characters in words separated by whitespace.
-        if (d_delimiter.length() == 0) {
+        if (w_delimiter.length() == 0) {
             String[] words = fcontent.split(" ");
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
@@ -258,7 +254,7 @@ public class Main {
         else
         {
             //if there is a delimiter, need to add the character here.
-            String[] words = fcontent.split(d_delimiter);
+            String[] words = fcontent.split(w_delimiter);
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
@@ -276,7 +272,8 @@ public class Main {
 
     //If r_opt, remove the character from the string. Non alphabetic characters are unaffected.
     private static String r_opt(String fcontent, String r_delimiter) {
-        String result = "";
+
+      String result = "";
         for (int i = 0; i < fcontent.length(); i++) {
             String character = String.valueOf(fcontent.charAt(i));
             if (!r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
@@ -284,6 +281,8 @@ public class Main {
         }
         return result;
     }
+
+
     private static String k_opt(String fcontent, String k_delimiter) {
         String result = "";
         for (int i = 0; i < fcontent.length(); i++) {
@@ -293,6 +292,18 @@ public class Main {
         }
         return result;
     }
+
+
+        /*        String result = "";
+        for (int i = 0; i < fcontent.length(); i++) {
+            String character = String.valueOf(fcontent.charAt(i));
+            if (k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+                result = result.concat(character);
+        }
+        return result;
+    }
+
+ */
 
     //PERFECT: If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
     private static String c_opt(String fcontent)
@@ -347,7 +358,7 @@ public class Main {
 
     private static void usage()
     {
-        System.err.println("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>");
+        System.err.println("Usage: encode [-w [string]] [-r string | -k string] [-c] <filename>");
     }
     private static void file_not_found()
     {

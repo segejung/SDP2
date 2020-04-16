@@ -154,7 +154,7 @@ public class MainTest {
         String args[] = {"-w", "-c", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "ZYXcba321zyxCBA";
+        String expected = "ZYXcba321zyxCBA ";
 
         String actual = getFileContent(inputFile.getPath());
 

@@ -83,7 +83,7 @@ public class MyMainTest {
     private static final String FILE2 = "Howdy Billy, are you going to take computer";
     private static final String FILE3 = "abcXYZ123ABCxyz";
     private static final String FILE4 = "abc123ABC#@!?";
-    private static final String FILE5 = "abcABC";
+    private static final String FILE5 = "abcABC hello? I am,";
 
     // test cases
     // Purpose: input filename is invalid  : encode
@@ -245,7 +245,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {inputFile.getPath()};
         Main.main(args);
-        String expected = "ydwoH ,ylliB era uoy gniog ot ekat retupmoc ";
+        String expected = "ydwoH ylliB, era uoy gniog ot ekat retupmoc";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
@@ -473,7 +473,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"-w","-k","Hboiu","-c", inputFile.getPath()};
         Main.main(args);
-        String expected1 = "oHiBuoioouo";
+        String expected1 = "OhIbUOIOOUO";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
     }
@@ -482,8 +482,8 @@ public class MyMainTest {
     // Frame #: 44
     @Test
     public void encodeTest36() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-w","-k","Hboiu","-c", inputFile.getPath()};
+        File inputFile = createInputFile(FILE5);
+        String args[] = {"-k","a", inputFile.getPath()};
         Main.main(args);
         String expected1 = "OhIbUOIOOUO";
         String actual1 = getFileContent(inputFile.getPath());
