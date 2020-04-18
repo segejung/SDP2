@@ -384,7 +384,7 @@ public class MainTest {
     // Frame #: Instructor Provided New Test Case
     @Test
     public void mainTest16() throws Exception {
-        File inputFile = createInputFile(FILE2);
+        File inputFile = createInputFile(FILE14);
 
         String args[] = {"-x", " ", inputFile.getPath()};
         Main.main(args);

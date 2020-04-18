@@ -92,8 +92,8 @@ public class MyMainTest {
     private static final String FILE50 = " ";
     private static final String FILE60 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String FILE70 = "0123456789";
-    private static final String FILE80 = "Let's try some **special**  %!(characters)!% ###\r" +
-            "and line breaks^$@ \r" +
+    private static final String FILE80 = "Let's try some **special** %!(characters)!% ###\r" +
+            "and line breaks^$@\r" +
             "in \\1/ file;\r" +
             ":-)";
     private static final String FILE90 = "Up with the white and gold\r" +
@@ -529,13 +529,13 @@ public class MyMainTest {
     // Purpose: To provide an example of a test case format
     // Frame #: Instructor example 3 from assignment directions
     @Test
-    public void mainTest3() throws Exception {
+    public void encodeTest37() throws Exception {
         File inputFile = createInputFile(FILE20);
 
         String args[] = {"-w", "-d", ":,", "-k", "aeiouxyz", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "yi yo,?eee xe  a  ea o io uoy ea ";
+        String expected = "yo ,yi ea uoy io o ea  a  xe ?eee";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -545,7 +545,7 @@ public class MyMainTest {
     // Purpose: To provide an example of a test case format
     // Frame #: Instructor example 4 from assignment directions
     @Test
-    public void mainTest4() throws Exception {
+    public void encodeTest38() throws Exception {
         File inputFile = createInputFile(FILE30);
 
         String args[] = {"-w", "-c", inputFile.getPath()};
@@ -562,7 +562,7 @@ public class MyMainTest {
     // Purpose: To provide an example of a test case format (no arguments passed)
     // Frame #: Instructor error example
     @Test
-    public void mainTest5() {
+    public void encodeTest39() {
         String args[]  = new String[0]; //no arguments
         Main.main(args);
         assertEquals(USAGE, errStream.toString().trim());
@@ -571,13 +571,13 @@ public class MyMainTest {
     // Purpose: To provide an example of a test case format
     // Frame #: Instructor example 5 from assignment directions
     @Test
-    public void mainTest6() throws Exception {
+    public void encodeTest40() throws Exception {
         File inputFile = createInputFile(FILE1);
         //space and period is a delimiter. replace this with !.
         String args[] = {"-d", " .", "-x", "!", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "abc!tuvw!XYZ";
+        String expected = "abc!uvw.XYZ";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -589,8 +589,8 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest7() throws Exception {
-        File inputFile = createInputFile(FILE2);
+    public void encodeTest41() throws Exception {
+        File inputFile = createInputFile(FILE20);
 
         String args[] = {"-x", "*", inputFile.getPath()};
         Main.main(args);
@@ -605,7 +605,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest8() throws Exception {
+    public void encodeTest42() throws Exception {
         File inputFile = createInputFile(FILE80);
 
         String args[] = {"-x", "o", inputFile.getPath()};
@@ -624,7 +624,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest9() throws Exception {
+    public void encodeTest43() throws Exception {
         File inputFile = createInputFile(FILE160);
 
         String args[] = {"-d", "a1", "-x", "z", "-k", "c", inputFile.getPath()};
@@ -640,7 +640,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest10() throws Exception {
+    public void encodeTest44() throws Exception {
         File inputFile = createInputFile(FILE90);
 
         String args[] = {"-d", "a", inputFile.getPath()};
@@ -656,13 +656,13 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest11() throws Exception {
+    public void encodeTest45() throws Exception {
         File inputFile = createInputFile(FILE50);
 
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = FILE50;
+        String expected = "";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -672,13 +672,13 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest12() throws Exception {
+    public void encodeTest46() throws Exception {
         File inputFile = createInputFile(FILE50);
 
         String args[] = {"-k", "abc", "-d", "xyz123%$", "-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = FILE50;
+        String expected = "";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -690,7 +690,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest13() throws Exception {
+    public void encodeTest47() throws Exception {
         File inputFile = createInputFile(FILE60);
 
         String args[] = {"-k", "aeiou123", "-r", "xyz", inputFile.getPath()};
@@ -707,7 +707,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest14() throws Exception {
+    public void encodeTest48() throws Exception {
         File inputFile = createInputFile(FILE130);
 
         String args[] = {"-r", "xyz", "-x", inputFile.getPath()};
@@ -725,7 +725,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest15() throws Exception {
+    public void encodeTest49() throws Exception {
         File inputFile = createInputFile(FILE130);
 
         String args[] = {"-w", inputFile.getPath()};
@@ -744,8 +744,8 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest16() throws Exception {
-        File inputFile = createInputFile(FILE20);
+    public void encodeTest50() throws Exception {
+        File inputFile = createInputFile(FILE140);
 
         String args[] = {"-x", " ", inputFile.getPath()};
         Main.main(args);
@@ -760,7 +760,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest17() throws Exception {
+    public void encodeTest51() throws Exception {
         File inputFile = createInputFile(FILE100);
 
         String args[] = {"-k", "Robert", "-c", inputFile.getPath()};
@@ -776,7 +776,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest18() throws Exception {
+    public void encodeTest52() throws Exception {
         File inputFile = createInputFile(FILE80);
 
         String args[] = {"-k", "ABCDE", inputFile.getPath()};
@@ -795,7 +795,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest19() throws Exception {
+    public void encodeTest53() throws Exception {
         File inputFile = createInputFile(FILE120);
 
         String args[] = {"-c", "-r", "UDP", inputFile.getPath()};
@@ -811,7 +811,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest20() throws Exception {
+    public void encodeTest54() throws Exception {
         File inputFile = createInputFile(FILE100);
 
         String args[] = {inputFile.getPath()};
@@ -827,7 +827,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest21() throws Exception {
+    public void encodeTest55() throws Exception {
         File inputFile = createInputFile(FILE170);
 
         String args[] = {"-d", " ", "-w", "-x", "+", inputFile.getPath()};
@@ -845,7 +845,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest22() throws Exception {
+    public void encodeTest56() throws Exception {
         File inputFile = createInputFile(FILE110);
 
         String args[] = {"-r", "abcdefghijklmnopqrstuvwxyz", inputFile.getPath()};
@@ -862,7 +862,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest23() throws Exception {
+    public void encodeTest57() throws Exception {
         File inputFile = createInputFile(FILE120);
 
         String args[] = {"-c-k", "abc", inputFile.getPath()};
@@ -879,7 +879,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest24() throws Exception {
+    public void encodeTest58() throws Exception {
         File inputFile = createInputFile(FILE90);
 
         String args[] = {"-k", "abc", "-z", inputFile.getPath()};
@@ -896,7 +896,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest25() throws Exception {
+    public void encodeTest59() throws Exception {
 
         String args[] = {"-a", "filedoesnotexist.txt"};
         Main.main(args);
@@ -907,7 +907,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest26() throws Exception {
+    public void encodeTest60() throws Exception {
 
         File inputFile = createInputFile(FILE150);
 
@@ -925,7 +925,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest27() throws Exception {
+    public void encodeTest61() throws Exception {
 
         File inputFile = createInputFile(FILE160);
 
@@ -943,7 +943,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest28() throws Exception {
+    public void encodeTest62() throws Exception {
 
         File inputFile = createInputFile(FILE90);
 
@@ -968,7 +968,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest29() throws Exception {
+    public void encodeTest63() throws Exception {
 
         File inputFile = createInputFile(FILE60);
 
@@ -985,7 +985,7 @@ public class MyMainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest30() throws Exception {
+    public void encodeTest64() throws Exception {
 
         File inputFile = createInputFile(FILE80);
 

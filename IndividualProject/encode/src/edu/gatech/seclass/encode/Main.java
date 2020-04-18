@@ -144,9 +144,9 @@ public class Main {
                         {
                             k_delimiter = args[i+1];
                             if (result.length() == 0)
-                                result = k_opt(fcontent,k_delimiter,d_delimiter);
+                                result = k_opt(fcontent,k_delimiter,d_delimiter,x_delimiter);
                             else
-                                result = k_opt(result,k_delimiter,d_delimiter);
+                                result = k_opt(result,k_delimiter,d_delimiter,x_delimiter);
                             i++;
                         }
                         else
@@ -167,6 +167,7 @@ public class Main {
                                 result = x_opt(fcontent,x_delimiter,d_delimiter);
                             else
                                 result = x_opt(result,x_delimiter,d_delimiter);
+
                             i++;
                         } else {
                             if (result.length() == 0)
@@ -277,73 +278,108 @@ public class Main {
     private static String r_opt(String fcontent, String r_delimiter, String d_delimiter) {
         String delimiter = " ";
         if (d_delimiter != "") {
-            delimiter = d_delimiter;
+            char[] chars = d_delimiter.toCharArray();
+            String result2 = "";
+            for (int j = 0; j < d_delimiter.length(); j++) {
+                String character2 = String.valueOf(fcontent.charAt(j));
+                if (!fcontent.matches(String.valueOf(chars[j])))
+                    result2 = result2.concat(character2);
+            }
+            String result = "";
+            for (int i = 0; i < fcontent.length(); i++) {
+                String character = String.valueOf(fcontent.charAt(i));
+
+                if (!character.matches("^[a-zA-Z0-9]*$") || !character.matches(String.valueOf(chars[0])) || !character.matches(String.valueOf(chars[1])) || !character.matches(String.valueOf(chars[2])) || !r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
+                    result = result.concat(character);
+
+            }
+            return result;
+        } else {
+            char[] chars = delimiter.toCharArray();
+            String result2 = "";
+            for (int j = 0; j < delimiter.length(); j++) {
+                String character2 = String.valueOf(fcontent.charAt(j));
+                if (!fcontent.matches(String.valueOf(chars[j])))
+                    result2 = result2.concat(character2);
+            }
+            String result = "";
+            for (int i = 0; i < fcontent.length(); i++) {
+                String character = String.valueOf(fcontent.charAt(i));
+
+                if (!character.matches("^[a-zA-Z0-9]*$") || !r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
+                    result = result.concat(character);
+
+            }
+            return result;
         }
 
-      String result = "";
-        for (int i = 0; i < fcontent.length(); i++) {
-            String character = String.valueOf(fcontent.charAt(i));
-            for (int j = 0; j < delimiter.le.[] chars = fcontent.toCharArray();
-                char c = chars[i];
-            if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(delimiter.contains(character.chars())) || !r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
-                result = result.concat(character);
-        }
-        return result;
     }
 
     //If k_opt, keep the character from the string. Non alphabetic characters are unaffected.
-    private static String k_opt(String fcontent, String k_delimiter, String d_delimiter) {
+    private static String k_opt(String fcontent, String k_delimiter, String d_delimiter, String x_delimiter) {
         String delimiter = " ";
         if (d_delimiter != "") {
-            delimiter = d_delimiter;
+            if (x_delimiter != "") {
+                String result = "";
+                for (int i = 0; i < fcontent.length(); i++) {
+                    String character = String.valueOf(fcontent.charAt(i));
+
+                    if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(x_delimiter) || k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+                        result = result.concat(character);
+                }
+                return result;
+            } else {
+                String result = "";
+                for (int i = 0; i < fcontent.length(); i++) {
+                    String character = String.valueOf(fcontent.charAt(i));
+
+                    if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(d_delimiter) || k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+                        result = result.concat(character);
+                }
+                return result;
+            }
+
+        } else {
+            if (x_delimiter != "") {
+                String result = "";
+                for (int i = 0; i < fcontent.length(); i++) {
+                    String character = String.valueOf(fcontent.charAt(i));
+
+                    if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(x_delimiter) || k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+                        result = result.concat(character);
+                }
+                return result;
+            } else {
+                String result = "";
+                for (int i = 0; i < fcontent.length(); i++) {
+                    String character = String.valueOf(fcontent.charAt(i));
+
+                    if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(delimiter) || k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+                        result = result.concat(character);
+                }
+                return result;
+            }
+
         }
-
-        String result = "";
-        for(int i = 0; i < fcontent.length(); i++){
-            String character = String.valueOf(fcontent.charAt(i));
-
-            if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(delimiter) || k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
-                result = result.concat(character);
-
-        }
-        return result;
     }
 
     //-x: if specified, the capitalize utility will flip the capitalization of all letters in the file,
     // after applying any other transformation.
 
     public static String x_opt(String fcontent, String x_delimiter, String d_delimiter) {
-        return x_delimiter;
-    }
-       /*
+
+
         String delimiter = "\\s";
 
         if (d_delimiter != "") {
-            delimiter = d_delimiter;
+            return fcontent.replaceAll(d_delimiter, x_delimiter);
+        } else {
+            return fcontent.replaceAll(delimiter, x_delimiter);
         }
 
-        //fcontent = fcontent.replaceAll("\\s", "-");
 
-        String[] words = fcontent.split(delimiter);
-        String reversedString = "";
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            String reverseWord = "";
-
-            reversedString = reversedString + reverseWord + delimiter;
-        }
-        return reversedString;
     }
-/*
-        char[] chars = delimiter.toCharArray();
-        for (int i = 0; i < chars.length; i++)
-        {
-            char c = chars[i];
-            fcontent = fcontent.replaceAll(String.valueOf(c), x_delimiter);
 
-        }
-
- */
 
     //PERFECT: If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
     private static String c_opt(String fcontent)
@@ -363,12 +399,6 @@ public class Main {
         }
         return String.valueOf(chars).replaceAll("\\r"," ");
     }
-
-
-
-
-
-
 
 
     private static void writeStringFile(String result, String filename)
