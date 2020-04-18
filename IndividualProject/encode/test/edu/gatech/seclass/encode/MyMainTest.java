@@ -85,6 +85,41 @@ public class MyMainTest {
     private static final String FILE4 = "abc123ABC#@!?";
     private static final String FILE5 = "abcABC hello? I am,";
     private static final String FILE6 = "adcyu*srtud *bjkk7?^";
+    private static final String FILE10 = "abc  tuvw.XYZ";
+    private static final String FILE20 = "Howdy Billy, are you going to take cs6300 and cs6400 next semester?";
+    private static final String FILE30 = "abcXYZ123ABCxyz";
+    private static final String FILE40 = "AbcXYZ\nabc\nXYZcba";
+    private static final String FILE50 = " ";
+    private static final String FILE60 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String FILE70 = "0123456789";
+    private static final String FILE80 = "Let's try some **special**  %!(characters)!% ###\r" +
+            "and line breaks^$@ \r" +
+            "in \\1/ file;\r" +
+            ":-)";
+    private static final String FILE90 = "Up with the white and gold\r" +
+            "Down with the red and black\r" +
+            "Georgia Tech is out for a victory\r" +
+            "We'll drop a battle axe on georgia's head\r" +
+            "When we meet her our team is sure to beat her\r" +
+            "Down on the old farm there will be no sound\r" +
+            "'Till our bow wows rips through the air\r" +
+            "When the battle is over georgia's team will be found\r" +
+            "With the Yellow Jacket's swarming 'round! Hey!";
+    private static final String FILE100 = "Robert'); DROP TABLE students;--";
+    private static final String FILE110 = ".*";
+    private static final String FILE120 = " I’ve got a really good UDP joke to tell you, but I don’t know if you’ll get it. ";
+    private static final String FILE130 = "3 Database Admins walked\n" +
+            "into a NoSQL bar.\n"  +
+            "A little later, they walked\n"  +
+            "out because they couldn’t find a table.";
+    private static final String FILE140 = "\naAbB\ncCdD eE\nfF";
+    private static final String FILE150 = "";
+    private static final String FILE160 = "abcabc123123abcabc123123 abcabc123123abcabc123123  abcabc123123abcabc123123";
+    private static final String FILE170 = "Up with the white and gold\r" +
+            "Down with the red and black\r" +
+            "Georgia Tech is out for a victory\r";
+
+    private static final String USAGE = "Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>";
 
     // test cases
     // Purpose: input filename is invalid  : encode
@@ -489,5 +524,481 @@ public class MyMainTest {
         String expected1 = "aAa";
         String actual1 = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected1, actual1);
+    }
+
+    // Purpose: To provide an example of a test case format
+    // Frame #: Instructor example 3 from assignment directions
+    @Test
+    public void mainTest3() throws Exception {
+        File inputFile = createInputFile(FILE20);
+
+        String args[] = {"-w", "-d", ":,", "-k", "aeiouxyz", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "yi yo,?eee xe  a  ea o io uoy ea ";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: To provide an example of a test case format
+    // Frame #: Instructor example 4 from assignment directions
+    @Test
+    public void mainTest4() throws Exception {
+        File inputFile = createInputFile(FILE30);
+
+        String args[] = {"-w", "-c", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "ZYXcba321zyxCBA";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+
+    // Purpose: To provide an example of a test case format (no arguments passed)
+    // Frame #: Instructor error example
+    @Test
+    public void mainTest5() {
+        String args[]  = new String[0]; //no arguments
+        Main.main(args);
+        assertEquals(USAGE, errStream.toString().trim());
+    }
+
+    // Purpose: To provide an example of a test case format
+    // Frame #: Instructor example 5 from assignment directions
+    @Test
+    public void mainTest6() throws Exception {
+        File inputFile = createInputFile(FILE1);
+        //space and period is a delimiter. replace this with !.
+        String args[] = {"-d", " .", "-x", "!", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "abc!tuvw!XYZ";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertTrue(errStream.toString().isBlank());
+        assertTrue(outStream.toString().isBlank());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest7() throws Exception {
+        File inputFile = createInputFile(FILE2);
+
+        String args[] = {"-x", "*", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "Howdy*Billy,*are*you*going*to*take*cs6300*and*cs6400*next*semester?";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest8() throws Exception {
+        File inputFile = createInputFile(FILE80);
+
+        String args[] = {"-x", "o", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "Let'sotryosomeo**special**o%!(characters)!%o###o" +
+                "andolineobreaks^$@o" +
+                "ino\\1/ofile;o" +
+                ":-)";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest9() throws Exception {
+        File inputFile = createInputFile(FILE160);
+
+        String args[] = {"-d", "a1", "-x", "z", "-k", "c", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "zczczczcz zczczczcz  zczczczcz";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest10() throws Exception {
+        File inputFile = createInputFile(FILE90);
+
+        String args[] = {"-d", "a", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE90;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest11() throws Exception {
+        File inputFile = createInputFile(FILE50);
+
+        String args[] = {"-w", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE50;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest12() throws Exception {
+        File inputFile = createInputFile(FILE50);
+
+        String args[] = {"-k", "abc", "-d", "xyz123%$", "-w", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE50;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertTrue(outStream.toString().isBlank());
+        assertTrue(errStream.toString().isBlank());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest13() throws Exception {
+        File inputFile = createInputFile(FILE60);
+
+        String args[] = {"-k", "aeiou123", "-r", "xyz", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "FILE60";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals(USAGE, errStream.toString().trim());
+        assertTrue(outStream.toString().isBlank());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest14() throws Exception {
+        File inputFile = createInputFile(FILE130);
+
+        String args[] = {"-r", "xyz", "-x", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE130;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertTrue(outStream.toString().isBlank());
+        assertEquals(USAGE, errStream.toString().trim());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest15() throws Exception {
+        File inputFile = createInputFile(FILE130);
+
+        String args[] = {"-w", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "3 esabataD snimdA deklaw\n" +
+                "otni a LQSoN .rab\n"  +
+                "A elttil ,retal yeht deklaw\n"  +
+                "tuo esuaceb yeht t’ndluoc dnif a .elbat";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest16() throws Exception {
+        File inputFile = createInputFile(FILE20);
+
+        String args[] = {"-x", " ", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = " aAbB cCdD eE fF";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest17() throws Exception {
+        File inputFile = createInputFile(FILE100);
+
+        String args[] = {"-k", "Robert", "-c", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "rOBERT'); ro tbe TET;--";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest18() throws Exception {
+        File inputFile = createInputFile(FILE80);
+
+        String args[] = {"-k", "ABCDE", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "e'  e **eca**  %!(caace)!% ###\r" +
+                "ad e bea^$@ \r" +
+                " \\/ e;\r" +
+                ":-)";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest19() throws Exception {
+        File inputFile = createInputFile(FILE120);
+
+        String args[] = {"-c", "-r", "UDP", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = " i’VE GOT A REALLY GOO  JOKE TO TELL YO, BT i ON’T KNOW IF YO’LL GET IT. ";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest20() throws Exception {
+        File inputFile = createInputFile(FILE100);
+
+        String args[] = {inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "treboR'); PORD ELBAT stneduts;--";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest21() throws Exception {
+        File inputFile = createInputFile(FILE170);
+
+        String args[] = {"-d", " ", "-w", "-x", "+", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "pU+htiw+eht+etihw+dna+nwoD\rdlog" +
+                "+htiw+eht+der+dna+aigroeG\rkcalb" +
+                "+hceT+si+tuo+rof+a+\ryrotciv";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest22() throws Exception {
+        File inputFile = createInputFile(FILE110);
+
+        String args[] = {"-r", "abcdefghijklmnopqrstuvwxyz", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE110;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertTrue(errStream.toString().trim().isBlank());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest23() throws Exception {
+        File inputFile = createInputFile(FILE120);
+
+        String args[] = {"-c-k", "abc", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE120;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertEquals(USAGE, errStream.toString().trim());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest24() throws Exception {
+        File inputFile = createInputFile(FILE90);
+
+        String args[] = {"-k", "abc", "-z", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE90;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertEquals(USAGE, errStream.toString().trim());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest25() throws Exception {
+
+        String args[] = {"-a", "filedoesnotexist.txt"};
+        Main.main(args);
+
+        assertEquals("File Not Found", errStream.toString().trim());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest26() throws Exception {
+
+        File inputFile = createInputFile(FILE150);
+
+        String args[] = {"-k", "abc", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE150;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertTrue(errStream.toString().trim().isBlank());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest27() throws Exception {
+
+        File inputFile = createInputFile(FILE160);
+
+        String args[] = {"-d", "abc", "-r", "abc", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = FILE160;
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+        assertTrue(errStream.toString().trim().isBlank());
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest28() throws Exception {
+
+        File inputFile = createInputFile(FILE90);
+
+        String args[] = {"-c", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "uP WITH THE WHITE AND GOLD " +
+                "dOWN WITH THE RED AND BLACK " +
+                "gEORGIA tECH IS OUT FOR A VICTORY " +
+                "wE'LL DROP A BATTLE AXE ON GEORGIA'S HEAD " +
+                "wHEN WE MEET HER OUR TEAM IS SURE TO BEAT HER " +
+                "dOWN ON THE OLD FARM THERE WILL BE NO SOUND " +
+                "'tILL OUR BOW WOWS RIPS THROUGH THE AIR " +
+                "wHEN THE BATTLE IS OVER GEORGIA'S TEAM WILL BE FOUND " +
+                "wITH THE yELLOW jACKET'S SWARMING 'ROUND! hEY!";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest29() throws Exception {
+
+        File inputFile = createInputFile(FILE60);
+
+        String args[] = {"-d", "z", "-k", "aeiou", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "aeiouzAEIOU";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
+    }
+
+    // Purpose: New Test Case for Refactoring
+    // Frame #: Instructor Provided New Test Case
+    @Test
+    public void mainTest30() throws Exception {
+
+        File inputFile = createInputFile(FILE80);
+
+        String args[] = {"-r", "*s*", inputFile.getPath()};
+        Main.main(args);
+
+        String expected = "Let' try ome **pecial**  %!(character)!% ###\r" +
+                "and line break^$@ \r" +
+                "in \\1/ file;\r" +
+                ":-)";
+
+        String actual = getFileContent(inputFile.getPath());
+
+        assertEquals("The files differ!", expected, actual);
     }
 }

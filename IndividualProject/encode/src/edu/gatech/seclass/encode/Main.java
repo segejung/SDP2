@@ -29,7 +29,6 @@ public class Main {
         String arg = "";
         String result = "";
         String fcontent = "";
-        String w_delimiter = "";
         String r_delimiter = "";
         String k_delimiter = "";
         String d_delimiter = "";
@@ -86,6 +85,9 @@ public class Main {
                 while (i < args.length - 1 && file_exist)
                 {
                     arg = args[i].trim();
+
+
+
                     if(arg.equals("-d"))
                     {
                         //d needs to have string after -d
@@ -109,9 +111,9 @@ public class Main {
                     else if(arg.equals("-w"))
                     {
                         if (result.length() == 0)
-                            result = w_opt(fcontent);
+                            result = w_opt(fcontent, d_delimiter);
                         else
-                            result = w_opt(result);
+                            result = w_opt(result, d_delimiter);
                     }
 
                     //option 3. same for checking for r OPT
@@ -122,9 +124,9 @@ public class Main {
                         {
                             r_delimiter = args[i+1];
                             if (result.length() == 0)
-                                result = r_opt(fcontent,r_delimiter);
+                                result = r_opt(fcontent,r_delimiter,d_delimiter);
                             else
-                                result = r_opt(result,r_delimiter);
+                                result = r_opt(result,r_delimiter,d_delimiter);
                             i++;
                         }
                         else
@@ -142,9 +144,9 @@ public class Main {
                         {
                             k_delimiter = args[i+1];
                             if (result.length() == 0)
-                                result = k_opt(fcontent,k_delimiter);
+                                result = k_opt(fcontent,k_delimiter,d_delimiter);
                             else
-                                result = k_opt(result,k_delimiter);
+                                result = k_opt(result,k_delimiter,d_delimiter);
                             i++;
                         }
                         else
@@ -154,7 +156,24 @@ public class Main {
                             usage();
                         }
                     }
+                    else if(arg.equals("-r") || arg.equals("-k")) {
+                        usage();
+                    }
 
+                    else if (arg.equals("-x")) {
+                        if ((i + 1) != (args.length - 1) && !args[i + 1].startsWith("-")) {
+                            x_delimiter = args[i + 1];
+                            if (result.length() == 0)
+                                result = x_opt(fcontent,x_delimiter,d_delimiter);
+                            else
+                                result = x_opt(result,x_delimiter,d_delimiter);
+                            i++;
+                        } else {
+                            if (result.length() == 0)
+                                result = fcontent;
+                            usage();
+                        }
+                    }
                     //option 5. c opt.
                     else if(arg.equals("-c"))
                     {
@@ -163,7 +182,6 @@ public class Main {
                         else
                             result = c_opt(result);
                     }
-
                     else
                     {
                         valid_opt = false;
@@ -172,6 +190,7 @@ public class Main {
                     ++i;
 
                 }
+
 
                 //option 6. invalid opts
                 if(valid_opt == false)
@@ -192,8 +211,6 @@ public class Main {
             }
         }
     }
-
-
 
 
     private static String readstring(String filename) throws IOException
@@ -222,74 +239,111 @@ public class Main {
                 sb.setCharAt(ix2, fcontent.charAt(ix1));
             }
         } while(m.find());
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     //If d_opt,
     private static String d_opt(String fcontent, String d_delimiter) {
-        //if there is a delimiter, need to add the character here.
-        String[] words = fcontent.split(d_delimiter);
-        String reversedString = "";
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            String reverseWord = "";
-            for (int j = word.length() - 1; j >= 0; j--) {
-                reverseWord = reverseWord + word.charAt(j);
-            }
-            reversedString = reversedString + reverseWord + " ";
-        }
-        return reversedString;
+        //need to have a delimiter. Doesn't do anything.
+        return fcontent;
     }
-    //encode -w without delimiter and with delimiter
+    //encode -w
     // Reverses characters in each word.
-    private static String w_opt(String fcontent) {
+    private static String w_opt(String fcontent, String d_delimiter) {
+        String delimiter = "\\s";
 
-        //if there is -w, then reverse characters in words separated by whitespace.
-            String[] words = fcontent.split(" ");
+        if (d_delimiter != "") {
+            delimiter = d_delimiter;
+        }
+            //if there is -w, then reverse characters in words separated by whitespace.
+            String[] words = fcontent.split(delimiter);
             String reversedString = "";
             for (int i = 0; i < words.length; i++) {
                 String word = words[i];
                 String reverseWord = "";
+
                 for (int j = word.length() - 1; j >= 0; j--) {
-                    reverseWord = reverseWord + word.charAt(j);
+                   reverseWord = reverseWord + word.charAt(j);
                 }
                 reversedString = reversedString + reverseWord + " ";
             }
-            return reversedString;
+
+            return reversedString.trim();
         }
 
+
+
     //If r_opt, remove the character from the string. Non alphabetic characters are unaffected.
-    private static String r_opt(String fcontent, String r_delimiter) {
+    private static String r_opt(String fcontent, String r_delimiter, String d_delimiter) {
+        String delimiter = " ";
+        if (d_delimiter != "") {
+            delimiter = d_delimiter;
+        }
 
       String result = "";
         for (int i = 0; i < fcontent.length(); i++) {
             String character = String.valueOf(fcontent.charAt(i));
-            if (!r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
+            for (int j = 0; j < delimiter.le.[] chars = fcontent.toCharArray();
+                char c = chars[i];
+            if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(delimiter.contains(character.chars())) || !r_delimiter.contains(character.toUpperCase()) && !r_delimiter.contains(character.toLowerCase()))
                 result = result.concat(character);
         }
         return result;
     }
 
+    //If k_opt, keep the character from the string. Non alphabetic characters are unaffected.
+    private static String k_opt(String fcontent, String k_delimiter, String d_delimiter) {
+        String delimiter = " ";
+        if (d_delimiter != "") {
+            delimiter = d_delimiter;
+        }
 
-    private static String k_opt(String fcontent, String k_delimiter) {
         String result = "";
         for(int i = 0; i < fcontent.length(); i++){
             String character = String.valueOf(fcontent.charAt(i));
-            if (k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
+
+            if (!character.matches("^[a-zA-Z0-9]*$") || character.matches(delimiter) || k_delimiter.contains(character.toUpperCase()) || k_delimiter.contains(character.toLowerCase()))
                 result = result.concat(character);
-            // exclude any instance string of exWord from replacing process in str
-            if(fcontent.substring(i, fcontent.length()).indexOf(k_delimiter) + i == i){
-                i = i + k_delimiter.length()-1;
-            }
-            else{
-                fcontent = fcontent.substring(0,i) + " " + fcontent.substring(i+1);//replace each character with '+' symbol
-            }
+
         }
-        //return fcontent;
         return result;
     }
 
+    //-x: if specified, the capitalize utility will flip the capitalization of all letters in the file,
+    // after applying any other transformation.
 
+    public static String x_opt(String fcontent, String x_delimiter, String d_delimiter) {
+        return x_delimiter;
+    }
+       /*
+        String delimiter = "\\s";
+
+        if (d_delimiter != "") {
+            delimiter = d_delimiter;
+        }
+
+        //fcontent = fcontent.replaceAll("\\s", "-");
+
+        String[] words = fcontent.split(delimiter);
+        String reversedString = "";
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            String reverseWord = "";
+
+            reversedString = reversedString + reverseWord + delimiter;
+        }
+        return reversedString;
+    }
+/*
+        char[] chars = delimiter.toCharArray();
+        for (int i = 0; i < chars.length; i++)
+        {
+            char c = chars[i];
+            fcontent = fcontent.replaceAll(String.valueOf(c), x_delimiter);
+
+        }
+
+ */
 
     //PERFECT: If -c, it will reverse the capitalization of lowercase to uppercase and uppercase to lowercase.
     private static String c_opt(String fcontent)
@@ -307,28 +361,15 @@ public class Main {
                 chars[i] = Character.toUpperCase(c);
             }
         }
-        return String.valueOf(chars);
+        return String.valueOf(chars).replaceAll("\\r"," ");
     }
 
-    //-x: if specified, the capitalize utility will flip the capitalization of all letters in the file,
-    // after applying any other transformation.
 
-    private static String x_opt(String fcontent, String x_delimiter)
-    {
 
-        //if there is a delimiter, need to add the character here.
-        String[] words = fcontent.split(" ");
-        String reversedString = "";
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            String reverseWord = "";
-            for (int j = word.length() - 1; j >= 0; j--) {
-                reverseWord = reverseWord + word.charAt(j);
-            }
-            reversedString = reversedString + reverseWord + x_delimiter;
-        }
-        return reversedString;
-    }
+
+
+
+
 
     private static void writeStringFile(String result, String filename)
     {

@@ -373,7 +373,7 @@ public class MainTest {
         String expected = "3 esabataD snimdA deklaw\n" +
                 "otni a LQSoN .rab\n"  +
                 "A elttil ,retal yeht deklaw\n"  +
-                "tuo esuaceb yeht t’ndluoc dnif a .elbat";;
+                "tuo esuaceb yeht t’ndluoc dnif a .elbat";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -384,7 +384,7 @@ public class MainTest {
     // Frame #: Instructor Provided New Test Case
     @Test
     public void mainTest16() throws Exception {
-        File inputFile = createInputFile(FILE14);
+        File inputFile = createInputFile(FILE2);
 
         String args[] = {"-x", " ", inputFile.getPath()};
         Main.main(args);
