@@ -1,1 +1,33 @@
 JUnit version 4.12
+.........................E............E.E...........E.E....
+Time: 0.546
+There were 5 failures:
+1) encodeTest38(edu.gatech.seclass.encode.MyMainTest)
+edu.gatech.seclass.encode.SDPBugException: You found Bug #10. 
+Arguments used: [-r, |, C:\Users\segej\AppData\Local\Temp\junit14971873806682117311\junit18446407025048980106.tmp]
+Original File:  
+Throws Exception: IndexOutOfBoundException
+2) encodeTest52(edu.gatech.seclass.encode.MyMainTest)
+edu.gatech.seclass.encode.SDPBugException: You found Bug #10. 
+Arguments used: [-k, ABCDE, C:\Users\segej\AppData\Local\Temp\junit6509189680069560852\junit548037262092122244.tmp]
+Original File:  
+Throws Exception: IndexOutOfBoundException
+3) encodeTest53(edu.gatech.seclass.encode.MyMainTest)
+edu.gatech.seclass.encode.SDPBugException: You found Bug #10. 
+Arguments used: [-r, |, UDP, C:\Users\segej\AppData\Local\Temp\junit6972619273710926345\junit12646518186728102915.tmp]
+Original File:  
+Throws Exception: IndexOutOfBoundException
+4) encodeTest2(edu.gatech.seclass.encode.MyMainTest)
+edu.gatech.seclass.encode.SDPBugException: You found Bug #5. 
+Arguments used: [-r, C:\Users\segej\AppData\Local\Temp\junit9282348336520407828\junit13256108348048004190.tmp]
+Original File: abc tuvw.XYZ 
+New File Content: b vw.XYZ
+5) encodeTest3(edu.gatech.seclass.encode.MyMainTest)
+edu.gatech.seclass.encode.SDPBugException: You found Bug #5. 
+Arguments used: [-k, C:\Users\segej\AppData\Local\Temp\junit14425503519163665801\junit10103203951739344959.tmp]
+Original File: abc tuvw.XYZ 
+New File Content: ac tu.
+
+FAILURES!!!
+Tests run: 54,  Failures: 5
+

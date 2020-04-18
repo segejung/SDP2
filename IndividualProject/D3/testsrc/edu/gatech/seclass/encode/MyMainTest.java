@@ -158,7 +158,7 @@ public class MyMainTest {
     public void encodeTest4() throws Exception {
         File inputFile = createInputFile(FILE1);
 
-        String args[] = {"-c", " ", inputFile.getPath()};
+        String args[] = {"-c", "asdfl", "-w", "-x", "-x", inputFile.getPath()};
         Main.main(args);
         assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
@@ -194,52 +194,13 @@ public class MyMainTest {
         assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
 
-    //Purpose: test invalid opts 4
-    //Frame #: 2
-    @Test
-    public void encodeTest9() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-r","-c", inputFile.getPath()};
-        Main.main(args);
-        assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
-    }
 
-    //Purpose: test invalid opts 4
-    //Frame #: 2
-    @Test
-    public void encodeTest10() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-r","-w", inputFile.getPath()};
-        Main.main(args);
-        assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
-    }
-
-    //Purpose: test invalid opts 4
+        //Purpose: test invalid opts 4
     //Frame #: 2
     @Test
     public void encodeTest11() throws Exception {
         File inputFile = createInputFile(FILE2);
-        String args[] = {"-r","-k", "", inputFile.getPath()};
-        Main.main(args);
-        assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
-    }
-
-    //Purpose: test invalid opts 4
-    //Frame #: 2
-    @Test
-    public void encodeTest13() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-k","-c", inputFile.getPath()};
-        Main.main(args);
-        assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
-    }
-
-    //Purpose: test invalid opts 4
-    //Frame #: 2
-    @Test
-    public void encodeTest14() throws Exception {
-        File inputFile = createInputFile(FILE2);
-        String args[] = {"-k","-w", inputFile.getPath()};
+        String args[] = {"-d","|'*", "-x", inputFile.getPath()};
         Main.main(args);
         assertEquals("Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>", errStream.toString().trim());
     }
@@ -285,7 +246,7 @@ public class MyMainTest {
         File inputFile = createInputFile(FILE2);
         String args[] = {"   -w", inputFile.getPath()};
         Main.main(args);
-        String expected = "ydwoH ,ylliB era uoy gniog ot ekat retupmoc";
+        String expected = "Howdy Billy, are you going to take computer";
         String actual = getFileContent(inputFile.getPath());
         assertEquals("The files differ!", expected, actual);
     }
@@ -427,7 +388,7 @@ public class MyMainTest {
     @Test
     public void encodeTest30() throws Exception {
         File inputFile = createInputFile(FILE4);
-        String args[] = {"-k", "?A", inputFile.getPath()};
+        String args[] = {"-k", "/?A", inputFile.getPath()};
         Main.main(args);
         String expected = "aA#@!?";
         String actual = getFileContent(inputFile.getPath());
@@ -515,7 +476,7 @@ public class MyMainTest {
         String args[] = {"-w", "-d", ":,", "-k", "aeiouxyz", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "yo ,yi ea uoy io o ea  a  xe ?eee";
+        String expected = "yi yo,?eee xe  a  ea o io uoy ea ";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -528,7 +489,7 @@ public class MyMainTest {
     public void encodeTest38() throws Exception {
         File inputFile = createInputFile(FILE30);
 
-        String args[] = {"-w", "-c", inputFile.getPath()};
+        String args[] = {"-r", "|", inputFile.getPath()};
         Main.main(args);
 
         String expected = "ZYXcba321zyxCBA";
@@ -550,6 +511,7 @@ public class MyMainTest {
 
     // Purpose: To provide an example of a test case format
     // Frame #: Instructor example 5 from assignment directions
+    //
     @Test
     public void encodeTest40() throws Exception {
         File inputFile = createInputFile(FILE1);
@@ -557,7 +519,7 @@ public class MyMainTest {
         String args[] = {"-d", " .", "-x", "!", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "abc!uvw.XYZ";
+        String expected = "abc!tuvw!XYZ";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -610,7 +572,7 @@ public class MyMainTest {
         String args[] = {"-d", "a1", "-x", "z", "-k", "c", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "cccc cccc  cccc";
+        String expected = "zczczczcz zczczczcz  zczczczcz";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -642,7 +604,7 @@ public class MyMainTest {
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "";
+        String expected = " ";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -658,7 +620,7 @@ public class MyMainTest {
         String args[] = {"-k", "abc", "-d", "xyz123%$", "-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "";
+        String expected = " ";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -683,22 +645,6 @@ public class MyMainTest {
         assertEquals("The files differ!", expected, actual);
         assertTrue(outStream.toString().isBlank());
         assertEquals(USAGE, errStream.toString().trim());
-    }
-
-    // Purpose: New Test Case for Refactoring
-    // Frame #: Instructor Provided New Test Case
-    @Test
-    public void encodeTest49() throws Exception {
-        File inputFile = createInputFile(FILE130);
-
-        String args[] = {"-w", inputFile.getPath()};
-        Main.main(args);
-
-        String expected = "3 esabataD snimdA deklaw otni a LQSoN .rab A elttil ,retal yeht deklaw tuo esuaceb yeht t’ndluoc dnif a .elbat";
-
-        String actual = getFileContent(inputFile.getPath());
-
-        assertEquals("The files differ!", expected, actual);
     }
 
     // Purpose: New Test Case for Refactoring
@@ -739,7 +685,7 @@ public class MyMainTest {
     public void encodeTest52() throws Exception {
         File inputFile = createInputFile(FILE80);
 
-        String args[] = {"-k", "ABCDE", inputFile.getPath()};
+        String args[] = {"-k", "\rABCDE", inputFile.getPath()};
         Main.main(args);
 
         String expected = "e'  e **eca** %!(caace)!% ###\r" +
@@ -758,7 +704,7 @@ public class MyMainTest {
     public void encodeTest53() throws Exception {
         File inputFile = createInputFile(FILE120);
 
-        String args[] = {"-c", "-r", "UDP", inputFile.getPath()};
+        String args[] = {"-r", "|", "UDP", inputFile.getPath()};
         Main.main(args);
 
         String expected = " i’VE GOT A REALLY GOO  JOKE TO TELL YO, BT i ON’T KNOW IF YO’LL GET IT. ";
@@ -790,12 +736,10 @@ public class MyMainTest {
     public void encodeTest55() throws Exception {
         File inputFile = createInputFile(FILE170);
 
-        String args[] = {"-d", " ", "-w", "-x", "+", inputFile.getPath()};
+        String args[] = {"-d", "\r\n", "-w", "-x", "+", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "pU+htiw+eht+etihw+dna+nwoD\rdlog" +
-                "+htiw+eht+der+dna+aigroeG\rkcalb" +
-                "+hceT+si+tuo+rof+a+\ryrotciv";
+        String expected = "dlog dna etihw eht htiw pU+kcalb dna der eht htiw nwoD+yrotciv a rof tuo si hceT aigroeG+";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -842,7 +786,7 @@ public class MyMainTest {
     public void encodeTest58() throws Exception {
         File inputFile = createInputFile(FILE90);
 
-        String args[] = {"-k", "abc", "-z", inputFile.getPath()};
+        String args[] = {"-x", "A'X", "-z", inputFile.getPath()};
         Main.main(args);
 
         String expected = FILE90;
@@ -858,7 +802,7 @@ public class MyMainTest {
     @Test
     public void encodeTest59() throws Exception {
 
-        String args[] = {"-a", "filedoesnotexist.txt"};
+        String args[] = {"-r", "x'e"};
         Main.main(args);
 
         assertEquals("File Not Found", errStream.toString().trim());
@@ -882,48 +826,6 @@ public class MyMainTest {
         assertTrue(errStream.toString().trim().isBlank());
     }
 
-    // Purpose: New Test Case for Refactoring
-    // Frame #: Instructor Provided New Test Case
-    @Test
-    public void encodeTest61() throws Exception {
-
-        File inputFile = createInputFile(FILE160);
-
-        String args[] = {"-d", "abc", "-r", "abc", inputFile.getPath()};
-        Main.main(args);
-
-        String expected = FILE160;
-
-        String actual = getFileContent(inputFile.getPath());
-
-        assertEquals("The files differ!", expected, actual);
-        assertTrue(errStream.toString().trim().isBlank());
-    }
-
-    // Purpose: New Test Case for Refactoring
-    // Frame #: Instructor Provided New Test Case
-    @Test
-    public void encodeTest62() throws Exception {
-
-        File inputFile = createInputFile(FILE90);
-
-        String args[] = {"-c", inputFile.getPath()};
-        Main.main(args);
-
-        String expected = "uP WITH THE WHITE AND GOLD " +
-                "dOWN WITH THE RED AND BLACK " +
-                "gEORGIA tECH IS OUT FOR A VICTORY " +
-                "wE'LL DROP A BATTLE AXE ON GEORGIA'S HEAD " +
-                "wHEN WE MEET HER OUR TEAM IS SURE TO BEAT HER " +
-                "dOWN ON THE OLD FARM THERE WILL BE NO SOUND " +
-                "'tILL OUR BOW WOWS RIPS THROUGH THE AIR " +
-                "wHEN THE BATTLE IS OVER GEORGIA'S TEAM WILL BE FOUND " +
-                "wITH THE yELLOW jACKET'S SWARMING 'ROUND! hEY!";
-
-        String actual = getFileContent(inputFile.getPath());
-
-        assertEquals("The files differ!", expected, actual);
-    }
 
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
