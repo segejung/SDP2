@@ -52,8 +52,8 @@ public class MainTest {
     }
 
     /*
-    *  TEST UTILITIES
-    */
+     *  TEST UTILITIES
+     */
 
     // Create File Utility
     private File createTmpFile() throws Exception {
@@ -67,7 +67,7 @@ public class MainTest {
         File file =  createTmpFile();
 
         OutputStreamWriter fileWriter =
-                     new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+                new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
 
         fileWriter.write(input);
 
@@ -86,19 +86,19 @@ public class MainTest {
         }
         return content;
     }
-	
-	/*
-	* TEST FILE CONTENT
-	*/
-	private static final String FILE1 = "abc  tuvw.XYZ";
+
+    /*
+     * TEST FILE CONTENT
+     */
+    private static final String FILE1 = "abc  tuvw.XYZ";
     private static final String FILE2 = "Howdy Billy, are you going to take cs6300 and cs6400 next semester?";
     private static final String FILE3 = "abcXYZ123ABCxyz";
     private static final String FILE4 = "AbcXYZ\nabc\nXYZcba";
     private static final String FILE5 = " ";
     private static final String FILE6 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String FILE7 = "0123456789";
-    private static final String FILE8 = "Let's try some **special**  %!(characters)!% ###\r" +
-            "and line breaks^$@ \r" +
+    private static final String FILE8 = "Let's try some **special** %!(characters)!% ###\r" +
+            "and line breaks^$@\r" +
             "in \\1/ file;\r" +
             ":-)";
     private static final String FILE9 = "Up with the white and gold\r" +
@@ -125,13 +125,13 @@ public class MainTest {
             "Georgia Tech is out for a victory\r";
 
     private static final String USAGE = "Usage: encode [-d string] [-w] [-x char] [-r string | -k string] [-c] <filename>";
-	
+
 
     // test cases
 
     /*
-    *   TEST CASES
-    */
+     *   TEST CASES
+     */
 
     // Purpose: To provide an example of a test case format
     // Frame #: Instructor example 1 from assignment directions
@@ -174,7 +174,7 @@ public class MainTest {
         String args[] = {"-w", "-d", ":,", "-k", "aeiouxyz", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "yi yo,?eee xe  a  ea o io uoy ea ";
+        String expected = "yo ,yi ea uoy io o ea  a  xe ?eee";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -216,7 +216,7 @@ public class MainTest {
         String args[] = {"-d", " .", "-x", "!", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "abc!tuvw!XYZ";
+        String expected = "abc!tuvw.XYZ";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -269,7 +269,7 @@ public class MainTest {
         String args[] = {"-d", "a1", "-x", "z", "-k", "c", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "zczczczcz zczczczcz  zczczczcz";
+        String expected = "cccc cccc  cccc";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -301,7 +301,7 @@ public class MainTest {
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = FILE5;
+        String expected = "";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -317,7 +317,7 @@ public class MainTest {
         String args[] = {"-k", "abc", "-d", "xyz123%$", "-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = FILE5;
+        String expected = "";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -329,27 +329,10 @@ public class MainTest {
     // Purpose: New Test Case for Refactoring
     // Frame #: Instructor Provided New Test Case
     @Test
-    public void mainTest13() throws Exception {
-        File inputFile = createInputFile(FILE6);
-
-        String args[] = {"-k", "aeiou123", "-r", "xyz", inputFile.getPath()};
-        Main.main(args);
-
-        String expected = "FILE6";
-
-        String actual = getFileContent(inputFile.getPath());
-
-        assertEquals(USAGE, errStream.toString().trim());
-        assertTrue(outStream.toString().isBlank());
-    }
-
-    // Purpose: New Test Case for Refactoring
-    // Frame #: Instructor Provided New Test Case
-    @Test
     public void mainTest14() throws Exception {
         File inputFile = createInputFile(FILE13);
 
-        String args[] = {"-r", "xyz", "-x", inputFile.getPath()};
+        String args[] = {"-r", "xz", "-x", inputFile.getPath()};
         Main.main(args);
 
         String expected = FILE13;
@@ -370,10 +353,7 @@ public class MainTest {
         String args[] = {"-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "3 esabataD snimdA deklaw\n" +
-                "otni a LQSoN .rab\n"  +
-                "A elttil ,retal yeht deklaw\n"  +
-                "tuo esuaceb yeht t’ndluoc dnif a .elbat";;
+        String expected = "3 esabataD snimdA deklaw otni a LQSoN .rab A elttil ,retal yeht deklaw tuo esuaceb yeht t’ndluoc dnif a .elbat";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -421,8 +401,8 @@ public class MainTest {
         String args[] = {"-k", "ABCDE", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "e'  e **eca**  %!(caace)!% ###\r" +
-                "ad e bea^$@ \r" +
+        String expected = "e'  e **eca** %!(caace)!% ###\r" +
+                "ad e bea^$@\r" +
                 " \\/ e;\r" +
                 ":-)";
 
@@ -589,15 +569,7 @@ public class MainTest {
         String args[] = {"-x", "-", "-c", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "uP-WITH-THE-WHITE-AND-GOLD-" +
-                "dOWN-WITH-THE-RED-AND-BLACK-" +
-                "gEORGIA-tECH-IS-OUT-FOR-A-VICTORY-" +
-                "wE'LL-DROP-A-BATTLE-AXE-ON-GEORGIA'S-HEAD-" +
-                "wHEN-WE-MEET-HER-OUR-TEAM-IS-SURE-TO-BEAT-HER-" +
-                "dOWN-ON-THE-OLD-FARM-THERE-WILL-BE-NO-SOUND-" +
-                "'tILL-OUR-BOW-WOWS-RIPS-THROUGH-THE-AIR-" +
-                "wHEN-THE-BATTLE-IS-OVER-GEORGIA'S-TEAM-WILL-BE-FOUND-" +
-                "wITH-THE-yELLOW-jACKET'S-SWARMING-'ROUND!-hEY!";
+        String expected = FILE9;
 
 
 
@@ -616,7 +588,7 @@ public class MainTest {
         String args[] = {"-d", "z", "-k", "aeiou","-w", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "uoieazUOIEA";
+        String expected = "uoiea UOIEA";
 
         String actual = getFileContent(inputFile.getPath());
 
@@ -633,8 +605,8 @@ public class MainTest {
         String args[] = {"-r", "*s*", inputFile.getPath()};
         Main.main(args);
 
-        String expected = "Let' try ome **pecial**  %!(character)!% ###\r" +
-                "and line break^$@ \r" +
+        String expected = "Let' try ome **pecial** %!(character)!% ###\r" +
+                "and line break^$@\r" +
                 "in \\1/ file;\r" +
                 ":-)";
 
